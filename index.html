@@ -77,6 +77,14 @@
   .header-wrap {
     position: sticky; top: 16px; z-index: 100;
     padding: 20px 0 12px;
+    transition: top 0.25s ease, padding 0.25s ease;
+  }
+  body.is-scrolled .header-wrap {
+    top: 6px;
+    padding: 8px 0 6px;
+  }
+  body.is-scrolled .header-shell {
+    box-shadow: 0 8px 24px -12px rgba(42,28,26,0.22);
   }
   .header-shell {
     max-width: var(--container);
@@ -148,13 +156,13 @@
     position: relative;
     width: 42px; height: 42px;
     border-radius: 50%;
-    background: var(--color-text);
+    background: var(--color-brand);
     color: #fff;
     display: flex; align-items: center; justify-content: center;
     margin-left: 4px;
     transition: background 0.2s ease;
   }
-  .header__cart:hover { background: var(--color-brand); }
+  .header__cart:hover { background: #b32419; }
   .header__cart svg { width: 18px; height: 18px; }
   .header__cart-badge {
     position: absolute;
@@ -627,7 +635,7 @@
   }
   @media (max-width: 640px) {
     .bestsellers-card {
-      flex: 0 0 calc((100% - 24px) / 2);
+      flex: 0 0 calc((100% - 10px) / 1.5);
     }
   }
   .product-card__bottle {
@@ -815,7 +823,7 @@
   }
   @media (max-width: 640px) {
     .linha__track { gap: 10px; }
-    .linha__track > .linha-card { flex: 0 0 calc((100% - 24px) / 2) !important; }
+    .linha__track > .linha-card { flex: 0 0 calc((100% - 10px) / 1.5) !important; }
   }
   .linha__track-grid-placeholder {
     grid-template-columns: repeat(5, 1fr);
@@ -892,10 +900,18 @@
   }
   @media (max-width: 640px) {
     .linha__track { gap: 10px; }
-    .linha__track > .linha-card { flex: 0 0 calc((100% - 24px) / 2); }
+    .linha__track > .linha-card { flex: 0 0 calc((100% - 10px) / 1.5); }
     .linha-card { scroll-snap-align: start; }
-    .linha__title { font-size: 24px; }
-    .linha__nav { display: none; }
+    .linha__head {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 12px !important;
+      margin-bottom: 16px !important;
+    }
+    .linha__title { font-size: 22px; }
+    .linha__sub { font-size: 13px; }
+    .linha__actions { gap: 0 !important; width: 100%; }
+    .linha__nav { display: none !important; }
   }
 
   /* ============= EDITORIAL GRID ============= */
@@ -1614,9 +1630,10 @@
     }
   }
   @media (max-width: 640px) {
+    section.indicam .indicam-rail { gap: 10px !important; }
     section.indicam .indicam-rail > .indicam-ugc {
-      flex: 0 0 calc((100% - 18px) / 1.8) !important;
-      max-width: calc((100% - 18px) / 1.8) !important;
+      flex: 0 0 calc((100% - 10px) / 1.5) !important;
+      max-width: calc((100% - 10px) / 1.5) !important;
     }
   }
   .indicam-ugc {
@@ -1635,14 +1652,11 @@
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .indicam-ugc__video:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.18); }
   .indicam-ugc__bg {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
   }
-  .indicam-ugc__video:hover .indicam-ugc__bg { transform: scale(1.04); }
   .indicam-ugc__bg--gradient {
     background: linear-gradient(165deg, #c8a98a 0%, #8a6a4a 50%, #4a3424 100%);
   }
@@ -1659,7 +1673,6 @@
     transition: background 0.2s ease, transform 0.2s ease;
   }
   .indicam-ugc__play svg { width: 22px; height: 22px; margin-left: 3px; }
-  .indicam-ugc__video:hover .indicam-ugc__play { background: #fff; transform: translate(-50%, -50%) scale(1.08); }
   .indicam-ugc__product {
     display: flex; align-items: center; gap: 10px;
     background: #fff;
@@ -1700,8 +1713,8 @@
     .indicam-ugc { flex: 0 0 calc((100% - 48px) / 3.5); }
   }
   @media (max-width: 640px) {
-    .indicam-rail { gap: 12px; }
-    .indicam-ugc { flex: 0 0 calc((100% - 18px) / 1.8); }
+    .indicam-rail { gap: 10px; }
+    .indicam-ugc { flex: 0 0 calc((100% - 10px) / 1.5); }
   }
 
   /* ============= PROMO STRIP (full bleed) ============= */
@@ -1828,7 +1841,7 @@
     .indicam__grid, .kits__grid { grid-template-columns: repeat(2, 1fr); }
     .footer__top { grid-template-columns: 1fr 1fr; }
     .novidade__inner { grid-template-columns: 1fr; }
-    .cta-inst__inner, .newsletter__inner { grid-template-columns: 1fr; }
+    .cta-inst__inner, .newsletter__inner { grid-template-columns: 1fr !important; }
     .header__action-label { display: none; }
     .nav-strip { overflow-x: auto; scrollbar-width: none; }
     .nav-strip::-webkit-scrollbar { display: none; }
@@ -1975,11 +1988,165 @@
     .novidade__visual { min-height: 320px; }
   }
 
+  /* ============= MOBILE MENU (offcanvas) ============= */
+  .header__menu-toggle {
+    display: none;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text);
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .header__menu-toggle svg { width: 22px; height: 22px; }
+  .mobile-menu {
+    position: fixed; inset: 0;
+    z-index: 200;
+    pointer-events: none;
+    visibility: hidden;
+  }
+  .mobile-menu[aria-hidden="false"] { pointer-events: auto; visibility: visible; }
+  .mobile-menu__backdrop {
+    position: absolute; inset: 0;
+    background: rgba(42,28,26,0.42);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .mobile-menu[aria-hidden="false"] .mobile-menu__backdrop { opacity: 1; }
+  .mobile-menu__panel {
+    position: absolute; top: 0; left: 0; bottom: 0;
+    width: min(86vw, 360px);
+    background: #fff;
+    display: flex; flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 4px 0 24px -8px rgba(42,28,26,0.18);
+  }
+  .mobile-menu[aria-hidden="false"] .mobile-menu__panel { transform: translateX(0); }
+  .mobile-menu__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid rgba(42,28,26,0.08);
+    flex-shrink: 0;
+  }
+  .mobile-menu__logo img { height: 28px; width: auto; display: block; }
+  .mobile-menu__close {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--color-text);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .mobile-menu__close svg { width: 20px; height: 20px; }
+  .mobile-menu__search {
+    position: relative;
+    padding: 16px 20px 8px;
+    flex-shrink: 0;
+  }
+  .mobile-menu__search svg {
+    position: absolute; left: 32px; top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    color: var(--color-mute);
+  }
+  .mobile-menu__search input {
+    width: 100%;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(42,28,26,0.12);
+    background: var(--color-cream);
+    padding: 0 18px 0 44px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--color-text);
+    outline: none;
+  }
+  .mobile-menu__nav {
+    display: flex; flex-direction: column;
+    padding: 8px 12px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  .mobile-menu__link {
+    display: block;
+    padding: 14px 12px;
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 10px;
+  }
+  .mobile-menu__link--primary {
+    background: var(--color-brand);
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .mobile-menu__foot {
+    padding: 16px 20px 24px;
+    border-top: 1px solid rgba(42,28,26,0.08);
+    display: flex; flex-direction: column; gap: 4px;
+    flex-shrink: 0;
+  }
+  .mobile-menu__action {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 8px;
+    font-family: var(--font-title);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-text);
+    text-decoration: none;
+    border-radius: 8px;
+  }
+  .mobile-menu__action svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--color-mute); }
+  body.menu-open { overflow: hidden; }
+
   /* ============= MOBILE REFINEMENTS ============= */
   @media (max-width: 1100px) {
     .benefits__grid { grid-template-columns: repeat(3, 1fr) !important; }
   }
   @media (max-width: 768px) {
+    .header__menu-toggle { display: inline-flex; }
+    .header { grid-template-columns: 1fr auto 1fr !important; padding: 8px 12px !important; gap: 8px !important; }
+    .header__logo { justify-content: center; justify-self: center; }
+    .header__actions { justify-self: end; }
+    .header__logo img { height: 28px !important; width: auto !important; }
+    .header__search { display: none !important; }
+    .header__actions .header__action { display: none !important; }
+    .header__actions { gap: 8px !important; }
+    .header__cart { width: 40px !important; height: 40px !important; }
+    .nav-strip {
+      display: flex !important;
+      padding: 6px 14px 8px !important;
+      gap: 2px !important;
+      overflow-x: auto;
+      scrollbar-width: none;
+      border-top: 1px solid rgba(42,28,26,0.06);
+    }
+    .nav-strip::-webkit-scrollbar { display: none; }
+    .nav-strip__pill {
+      padding: 6px 10px !important;
+      font-size: 12px !important;
+      background: transparent !important;
+      color: var(--color-mute) !important;
+      font-weight: 500 !important;
+      flex-shrink: 0;
+    }
+    .nav-strip__pill svg { display: none !important; }
+    .nav-strip__pill--active {
+      background: transparent !important;
+      color: var(--color-brand) !important;
+      font-weight: 700 !important;
+    }
+    .nav-dropdown { display: none !important; }
+    .nav-strip .nav-item:nth-child(n+4) { display: none !important; }
+    .header-wrap { padding: 12px 0 8px !important; }
+    body.is-scrolled .header-wrap { padding: 6px 0 4px !important; }
     .benefits__grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
     .cta-inst__copy { padding: 36px 28px !important; }
     .cta-inst__visual { min-height: 280px !important; }
@@ -1993,8 +2160,22 @@
   }
   @media (max-width: 640px) {
     .benefits { margin-top: 32px !important; }
-    .benefits__grid { grid-template-columns: 1fr !important; gap: 8px !important; }
-    .benefits__item { padding: 14px 16px !important; }
+    .benefits__grid {
+      display: flex !important;
+      grid-template-columns: none !important;
+      gap: 10px !important;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      margin: 0 !important;
+      padding: 0 0 4px !important;
+    }
+    .benefits__grid::-webkit-scrollbar { display: none; }
+    .benefits__item {
+      flex: 0 0 calc((100% - 10px) / 1.5);
+      scroll-snap-align: start;
+      padding: 14px 16px !important;
+    }
     .cta-inst { margin-top: 40px !important; }
     .cta-inst__inner { min-height: 0 !important; }
     .cta-inst__copy { padding: 28px 22px !important; }
@@ -2010,19 +2191,84 @@
     .newsletter { margin-top: 40px !important; }
     .newsletter__inner { grid-template-columns: 1fr !important; padding: 28px 22px !important; }
     .newsletter__title { font-size: 20px !important; }
-    .newsletter__form { flex-direction: column; }
-    .newsletter__input { width: 100%; }
-    .newsletter__submit { width: 100%; padding: 14px !important; }
+    .newsletter__form { flex-direction: column; gap: 10px !important; align-items: stretch; }
+    .newsletter__input { flex: 0 0 auto !important; width: 100%; height: 52px !important; min-height: 52px !important; box-sizing: border-box; font-size: 16px !important; padding: 0 22px !important; }
+    .newsletter__submit { flex: 0 0 auto !important; width: 100%; height: 52px !important; min-height: 52px !important; box-sizing: border-box; padding: 0 !important; font-size: 14px !important; }
     .medicos { margin-top: 40px !important; }
     .medicos__inner { gap: 20px !important; text-align: left; }
     .medicos__quote { font-size: 15px !important; }
     .kits { margin-top: 40px !important; }
     .bestsellers { margin-top: 40px !important; }
     .footer { margin-top: 56px !important; padding-top: 48px !important; }
-    .footer__top { grid-template-columns: 1fr !important; gap: 28px !important; }
+    .footer__top { grid-template-columns: 1fr !important; gap: 28px !important; text-align: center; }
+    .footer__brand > a { margin: 0 auto 16px !important; }
+    .footer__brand p { margin-left: auto !important; margin-right: auto !important; }
+    .footer__brand > div { justify-content: center !important; }
     .marquee { height: 32px !important; }
     .marquee__item { font-size: 11px !important; padding: 0 18px !important; }
+    .section-head {
+      flex-direction: column;
+      align-items: flex-start !important;
+      gap: 12px !important;
+      margin-bottom: 16px !important;
+    }
+    .section-head__sub { font-size: 13px; }
+    .section-head__actions { gap: 0 !important; width: 100%; justify-content: flex-start !important; }
     .section-head__actions .linha__nav { display: none !important; }
+    .bestsellers .product-grid,
+    [aria-label="Mais vendidos"] .product-grid,
+    .kits .product-grid,
+    .kits__grid {
+      gap: 10px !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+    .footer__top ul li { justify-content: center !important; }
+    .footer .container > div:last-child {
+      flex-direction: column !important;
+      justify-content: center !important;
+      text-align: center;
+      gap: 12px !important;
+    }
+    .footer .container > div:last-child > div {
+      justify-content: center !important;
+    }
+    .promo-strip { padding: 32px 20px !important; margin-top: 40px !important; }
+    .promo-strip__inner {
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 18px !important;
+      text-align: center;
+    }
+    .promo-strip__copy h3 { font-size: 22px !important; }
+    .institucional > div {
+      aspect-ratio: 3 / 4 !important;
+      min-height: 0 !important;
+    }
+    .institucional > div > div:last-child {
+      padding: 0 24px !important;
+      max-width: 100% !important;
+    }
+    .institucional h3 { font-size: 22px !important; }
+    .institucional p { font-size: 13px !important; }
+    .onde-comprar > div > div:first-of-type {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      justify-content: flex-start !important;
+      gap: 32px !important;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      margin: 0 0 24px !important;
+      padding: 0;
+    }
+    .onde-comprar > div > div:first-of-type::-webkit-scrollbar { display: none; }
+    .onde-comprar > div > div:first-of-type img {
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
   }
 </style>
 </head>
@@ -2054,6 +2300,9 @@
 <div class="header-wrap">
   <div class="header-shell">
   <header class="header">
+    <button class="header__menu-toggle" type="button" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false" onclick="toggleMobileMenu(true)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <a href="#" class="header__logo" aria-label="Nanovit">
       <img src="https://nanovitnutrition.com.br/cdn/shop/files/nanovit-suplementos-e-vitaminas-logo-color.svg?v=1716320281&width=240" alt="Nanovit">
     </a>
@@ -2205,6 +2454,44 @@
   </div>
 </div>
 
+<!-- ============= MOBILE MENU (offcanvas) ============= -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu__backdrop" onclick="toggleMobileMenu(false)"></div>
+  <aside class="mobile-menu__panel" role="dialog" aria-label="Menu de navegação">
+    <div class="mobile-menu__head">
+      <a href="#" class="mobile-menu__logo" aria-label="Nanovit">
+        <img src="https://nanovitnutrition.com.br/cdn/shop/files/nanovit-suplementos-e-vitaminas-logo-color.svg?v=1716320281&width=240" alt="Nanovit">
+      </a>
+      <button type="button" class="mobile-menu__close" aria-label="Fechar menu" onclick="toggleMobileMenu(false)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <form class="mobile-menu__search" onsubmit="return false;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="search" placeholder="O que você procura?" aria-label="Buscar">
+    </form>
+    <nav class="mobile-menu__nav" aria-label="Navegação">
+      <a href="#" class="mobile-menu__link mobile-menu__link--primary">Compre por objetivo</a>
+      <a href="#" class="mobile-menu__link">Quiz Personalizado</a>
+      <a href="#" class="mobile-menu__link">Kits</a>
+      <a href="#" class="mobile-menu__link">Mais vendidos</a>
+      <a href="#" class="mobile-menu__link">Lançamentos</a>
+      <a href="#" class="mobile-menu__link">Promoções</a>
+      <a href="#" class="mobile-menu__link">Todos os produtos</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="#" class="mobile-menu__action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Entrar / Cadastrar</span>
+      </a>
+      <a href="#" class="mobile-menu__action">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Ajuda</span>
+      </a>
+    </div>
+  </aside>
+</div>
+
 <!-- ============= HERO ============= -->
 <section class="hero container">
   <div class="hero__inner">
@@ -2326,11 +2613,11 @@
           <span><strong style="color:#2a1c1a;">4.9</strong> (287)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 89,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 119,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 89,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 29,96 sem juros</p>
-        <button style="margin-top:auto;background:#d4655c;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2356,11 +2643,11 @@
           <span><strong style="color:#2a1c1a;">4.8</strong> (212)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 89,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 116,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 89,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 29,97 sem juros</p>
-        <button style="margin-top:auto;background:#d4655c;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2387,11 +2674,11 @@
           <span><strong style="color:#2a1c1a;">4.7</strong> (156)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 74,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 104,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 74,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 24,96 sem juros</p>
-        <button style="margin-top:auto;background:#d4655c;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2421,7 +2708,7 @@
           <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 69,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 23,30 sem juros</p>
-        <button style="margin-top:auto;background:#d4655c;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2448,11 +2735,11 @@
           <span><strong style="color:#2a1c1a;">4.9</strong> (287)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 89,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 120,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 89,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 29,97 sem juros</p>
-        <button style="margin-top:auto;background:#d4655c;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2564,11 +2851,11 @@
           <span><strong style="color:#2a1c1a;">4.8</strong> (124)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 229,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 279,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 229,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 76,63 sem juros</p>
-        <button style="margin-top:auto;background:#2a1c1a;color:#fff;font-family:var(--font-title);font-weight:600;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2595,11 +2882,11 @@
           <span><strong style="color:#2a1c1a;">4.7</strong> (142)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 259,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 309,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 259,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 86,63 sem juros</p>
-        <button style="margin-top:auto;background:#2a1c1a;color:#fff;font-family:var(--font-title);font-weight:600;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2626,11 +2913,11 @@
           <span><strong style="color:#2a1c1a;">4.9</strong> (198)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 174,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 209,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 174,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 58,30 sem juros</p>
-        <button style="margin-top:auto;background:#2a1c1a;color:#fff;font-family:var(--font-title);font-weight:600;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2657,11 +2944,11 @@
           <span><strong style="color:#2a1c1a;">4.8</strong> (124)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 229,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 279,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 229,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 76,63 sem juros</p>
-        <button style="margin-top:auto;background:#2a1c1a;color:#fff;font-family:var(--font-title);font-weight:600;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2688,11 +2975,11 @@
           <span><strong style="color:#2a1c1a;">4.7</strong> (142)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 259,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 309,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 259,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 86,63 sem juros</p>
-        <button style="margin-top:auto;background:#2a1c1a;color:#fff;font-family:var(--font-title);font-weight:600;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2719,11 +3006,11 @@
           <span><strong style="color:#2a1c1a;">4.9</strong> (198)</span>
         </div>
         <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:2px;">
-          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 174,90</span>
           <span style="font-size:11px;color:#8a7a76;text-decoration:line-through;">R$ 209,90</span>
+          <span style="font-family:var(--font-title);font-weight:700;font-size:20px;color:#2a1c1a;letter-spacing:-0.01em;">R$ 174,90</span>
         </div>
         <p style="font-size:11px;color:#8a7a76;margin-bottom:14px;">ou 3x de R$ 58,30 sem juros</p>
-        <button style="margin-top:auto;background:#2a1c1a;color:#fff;font-family:var(--font-title);font-weight:600;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
+        <button style="margin-top:auto;background:#cc2b20;color:#fff;font-family:var(--font-title);font-weight:700;font-size:13px;padding:12px;border:none;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Adicionar
         </button>
@@ -2811,7 +3098,7 @@
           <p class="indicam-ugc__name" style="font-family:var(--font-title);font-weight:600;font-size:13px;color:#2a1c1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;">Laranja Moro Slim+</p>
           <p class="indicam-ugc__price" style="font-family:var(--font-title);font-weight:700;font-size:13px;color:#cc2b20;">R$ 89,90</p>
         </div>
-        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#2a1c1a;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
+        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#cc2b20;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </button>
       </div>
@@ -2827,7 +3114,7 @@
           <p class="indicam-ugc__name" style="font-family:var(--font-title);font-weight:600;font-size:13px;color:#2a1c1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;">NAC (N-Acetil L-Cis...)</p>
           <p class="indicam-ugc__price" style="font-family:var(--font-title);font-weight:700;font-size:13px;color:#cc2b20;">R$ 74,90</p>
         </div>
-        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#2a1c1a;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
+        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#cc2b20;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </button>
       </div>
@@ -2843,7 +3130,7 @@
           <p class="indicam-ugc__name" style="font-family:var(--font-title);font-weight:600;font-size:13px;color:#2a1c1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;">Nano 5Mag</p>
           <p class="indicam-ugc__price" style="font-family:var(--font-title);font-weight:700;font-size:13px;color:#cc2b20;">R$ 89,90</p>
         </div>
-        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#2a1c1a;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
+        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#cc2b20;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </button>
       </div>
@@ -2859,7 +3146,7 @@
           <p class="indicam-ugc__name" style="font-family:var(--font-title);font-weight:600;font-size:13px;color:#2a1c1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;">Nano Calm — Melatonina</p>
           <p class="indicam-ugc__price" style="font-family:var(--font-title);font-weight:700;font-size:13px;color:#cc2b20;">R$ 69,90</p>
         </div>
-        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#2a1c1a;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
+        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#cc2b20;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </button>
       </div>
@@ -2875,7 +3162,7 @@
           <p class="indicam-ugc__name" style="font-family:var(--font-title);font-weight:600;font-size:13px;color:#2a1c1a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;">Vitamina D3 + K2</p>
           <p class="indicam-ugc__price" style="font-family:var(--font-title);font-weight:700;font-size:13px;color:#cc2b20;">R$ 69,90</p>
         </div>
-        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#2a1c1a;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
+        <button class="indicam-ugc__add" aria-label="Adicionar ao carrinho" style="width:36px;height:36px;border-radius:50%;background:#cc2b20;color:#fff;border:none;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </button>
       </div>
@@ -2888,7 +3175,7 @@
   <div style="position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16 / 7;min-height:420px;">
     <img src="https://cdn.shopify.com/s/files/1/0749/8684/8435/files/Generated_Image_May_11_2026_-_5_00PM.png?v=1778533849" alt="Nanovit — Ciência funcional para uma rotina saudável" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.15) 35%,rgba(0,0,0,0) 60%);pointer-events:none;"></div>
-    <div style="position:absolute;top:0;left:0;right:0;padding:56px clamp(32px, 5vw, 72px);color:#fff;max-width:720px;">
+    <div style="position:absolute;top:50%;left:0;transform:translateY(-50%);padding:0 clamp(32px, 5vw, 72px);color:#fff;max-width:720px;">
       <span style="display:inline-block;font-family:var(--font-title);font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#fff;background:rgba(204,43,32,0.95);padding:6px 14px;border-radius:999px;margin-bottom:18px;">Nossa essência</span>
       <h3 style="font-family:var(--font-title);font-weight:700;font-size:24px;line-height:1.1;letter-spacing:-0.02em;color:#fff;margin-bottom:8px;text-wrap:balance;">Ciência funcional que cabe na sua rotina.</h3>
       <p style="font-size:14px;line-height:1.55;color:rgba(255,255,255,0.92);max-width:520px;margin-bottom:24px;">A Nanovit nasceu da inquietação de quem entende que cuidar do corpo é um ato presente. Fórmulas desenvolvidas com especialistas, ingredientes premium e total transparência nos rótulos — para entregar resultado real, sem promessas vazias.</p>
@@ -3097,6 +3384,40 @@
     var tryPlay = function(){ var p = video.play(); if (p && p.catch) p.catch(function(){}); };
     video.addEventListener('loadedmetadata', tryPlay);
     video.addEventListener('ended', tryPlay);
+  });
+</script>
+<script>
+  (function(){
+    var threshold = 24;
+    var ticking = false;
+    function update(){
+      if (window.scrollY > threshold) {
+        document.body.classList.add('is-scrolled');
+      } else {
+        document.body.classList.remove('is-scrolled');
+      }
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  })();
+
+  function toggleMobileMenu(open){
+    var menu = document.getElementById('mobileMenu');
+    var toggle = document.querySelector('.header__menu-toggle');
+    if (!menu) return;
+    var shouldOpen = (open === undefined) ? (menu.getAttribute('aria-hidden') === 'true') : !!open;
+    menu.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+    if (toggle) toggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    document.body.classList.toggle('menu-open', shouldOpen);
+  }
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') toggleMobileMenu(false);
+  });
+  document.querySelectorAll('.mobile-menu__link, .mobile-menu__action').forEach(function(el){
+    el.addEventListener('click', function(){ toggleMobileMenu(false); });
   });
 </script>
 <script>
