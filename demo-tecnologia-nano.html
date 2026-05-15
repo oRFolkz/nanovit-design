@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Demo · Tecnologia Nanocomprimido | Nanovit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-title: 'Montserrat Alternates', sans-serif;
+    --font-sub:   'Montserrat Alternates', sans-serif;
+    --font-body:  'Montserrat Alternates', sans-serif;
+    --font-weight-title: 700;
+    --font-weight-body: 400;
+    --size-body: 15px;
+    --color-brand: #cc2b20;
+    --color-brand-soft: #ffe9d9;
+    --color-cashback: rgba(204, 43, 32, 0.12);
+    --color-cashback-text: #cc2b20;
+    --color-bg: #ffffff;
+    --color-cream: #faf6f1;
+    --color-text: #2a1c1a;
+    --color-mute: #8a7a76;
+    --color-success: #1a7d3a;
+    --container: 1320px;
+    --radius: 14px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 22px;
+    --radius-pill: 999px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  body {
+    padding-left: clamp(16px, 3vw, 32px);
+    padding-right: clamp(16px, 3vw, 32px);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: var(--size-body);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { max-width: 100%; display: block; }
+
+  .container { max-width: var(--container); margin: 0 auto; }
+
+  /* ============ TECH NANO SECTION ============ */
+  .tech-nano {
+    padding: 64px 0 96px;
+  }
+  .tech-nano__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+
+  /* — Slider antes/depois — */
+  .tech-nano__slider { width: 100%; }
+  .ba-slider {
+    --pos: 50%;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: var(--color-cream);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    user-select: none;
+    cursor: ew-resize;
+    touch-action: none;
+  }
+  .ba-slider__media {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+  }
+  .ba-slider__media svg {
+    width: 100%; height: 100%;
+    display: block;
+  }
+  .ba-slider__media--before {
+    clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+    z-index: 2;
+  }
+  .ba-slider__media--after {
+    z-index: 1;
+  }
+  .ba-slider__handle {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: var(--pos);
+    width: 3px;
+    background: rgba(255,255,255,0.95);
+    transform: translateX(-50%);
+    z-index: 3;
+    pointer-events: none;
+    box-shadow: 0 0 0 1px rgba(42,28,26,0.06);
+    will-change: left;
+  }
+  .ba-slider__handle-knob {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    color: var(--color-text);
+    pointer-events: auto;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .ba-slider:hover .ba-slider__handle-knob { box-shadow: 0 4px 18px rgba(0,0,0,0.24); }
+  .ba-slider.is-dragging .ba-slider__handle-knob { transform: translate(-50%, -50%) scale(1.08); }
+  .ba-slider.is-dragging { cursor: grabbing; }
+  .ba-slider__handle-knob svg { width: 18px; height: 18px; }
+  .ba-slider__label {
+    position: absolute;
+    bottom: 16px;
+    background: rgba(255,255,255,0.92);
+    color: var(--color-text);
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 4px 12px -6px rgba(42,28,26,0.18);
+    z-index: 4;
+  }
+  .ba-slider__label--before {
+    left: 16px;
+    color: var(--color-mute);
+  }
+  .ba-slider__label--after {
+    right: 16px;
+    color: var(--color-brand);
+  }
+  .ba-slider__disclaimer {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.85);
+    color: var(--color-mute);
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-title);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 4;
+    white-space: nowrap;
+  }
+
+  /* — Copy column — */
+  .tech-nano__copy { max-width: 520px; }
+  .section__eyebrow {
+    display: block;
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+    margin-bottom: 14px;
+  }
+  .tech-nano__copy h2 {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-bottom: 20px;
+    text-wrap: balance;
+  }
+  .tech-nano__copy h2 em {
+    font-style: normal;
+    color: var(--color-brand);
+  }
+  .tech-nano__copy > p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text);
+    opacity: 0.85;
+    margin-bottom: 24px;
+  }
+  .tech-nano__bullets {
+    list-style: none;
+    display: flex; flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .tech-nano__bullets li {
+    display: flex; align-items: center;
+    gap: 12px;
+    font-size: 14.5px;
+    color: var(--color-text);
+    line-height: 1.5;
+  }
+  .tech-nano__bullets li svg {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(26,125,58,0.12);
+    color: var(--color-success);
+    padding: 4px;
+    flex-shrink: 0;
+  }
+  .tech-nano__note {
+    display: inline-block;
+    background: var(--color-cream);
+    padding: 12px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+  .tech-nano__note strong {
+    color: var(--color-brand);
+    font-weight: 700;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 768px) {
+    .tech-nano { padding: 40px 0 56px; }
+    .tech-nano__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .tech-nano__copy h2 { font-size: 28px; }
+    .tech-nano__copy > p { font-size: 14px; }
+    .ba-slider__label { font-size: 10px; padding: 6px 12px; bottom: 12px; }
+    .ba-slider__label--before { left: 12px; }
+    .ba-slider__label--after { right: 12px; }
+    .ba-slider__disclaimer { font-size: 9px; padding: 4px 10px; top: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ SEÇÃO TECNOLOGIA NANOCOMPRIMIDO ============ -->
+<section class="tech-nano container">
+  <div class="tech-nano__inner">
+
+    <!-- COLUNA ESQUERDA — Slider antes/depois -->
+    <div class="tech-nano__slider">
+      <div class="ba-slider" id="baSlider">
+
+        <!-- Imagem AFTER (Nanocomprimido — menor) -->
+        <div class="ba-slider__media ba-slider__media--after" aria-label="Nanocomprimido Nanovit na palma da mão">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="400" fill="#faf6f1"/>
+            <!-- Hand silhouette: palma aberta vista de cima, formato minimalista -->
+            <g fill="#e8d4bc" stroke="#d4ba94" stroke-width="1.5" stroke-linejoin="round">
+              <!-- 4 dedos -->
+              <rect x="130" y="110" width="32" height="120" rx="16"/>
+              <rect x="168" y="92"  width="32" height="138" rx="16"/>
+              <rect x="206" y="100" width="32" height="130" rx="16"/>
+              <rect x="244" y="118" width="32" height="112" rx="16"/>
+              <!-- Polegar -->
+              <path d="M122 235 Q88 220, 80 195 Q76 175, 92 168 Q108 162, 122 178 Z"/>
+              <!-- Palma -->
+              <path d="M115 215 Q105 230, 108 270 Q115 320, 165 332 L260 332 Q310 320, 295 270 Q298 230, 285 215 Z"/>
+            </g>
+            <!-- Creases sutis da palma -->
+            <path d="M140 270 Q200 285, 270 270" stroke="#d4ba94" stroke-width="1.2" fill="none" opacity="0.6"/>
+            <path d="M150 295 Q200 305, 255 295" stroke="#d4ba94" stroke-width="1" fill="none" opacity="0.4"/>
+            <!-- Nanocomprimido (pequeno) -->
+            <ellipse cx="203" cy="265" rx="20" ry="12" fill="#ffffff" stroke="#c9b89d" stroke-width="1.2"/>
+            <ellipse cx="203" cy="263" rx="13" ry="5" fill="#f4ece0" opacity="0.6"/>
+          </svg>
+        </div>
+
+        <!-- Imagem BEFORE (Comprimido tradicional — maior) -->
+        <div class="ba-slider__media ba-slider__media--before" aria-label="Comprimido tradicional na palma da mão">
+          <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="400" height="400" fill="#faf6f1"/>
+            <g fill="#e8d4bc" stroke="#d4ba94" stroke-width="1.5" stroke-linejoin="round">
+              <rect x="130" y="110" width="32" height="120" rx="16"/>
+              <rect x="168" y="92"  width="32" height="138" rx="16"/>
+              <rect x="206" y="100" width="32" height="130" rx="16"/>
+              <rect x="244" y="118" width="32" height="112" rx="16"/>
+              <path d="M122 235 Q88 220, 80 195 Q76 175, 92 168 Q108 162, 122 178 Z"/>
+              <path d="M115 215 Q105 230, 108 270 Q115 320, 165 332 L260 332 Q310 320, 295 270 Q298 230, 285 215 Z"/>
+            </g>
+            <path d="M140 270 Q200 285, 270 270" stroke="#d4ba94" stroke-width="1.2" fill="none" opacity="0.6"/>
+            <path d="M150 295 Q200 305, 255 295" stroke="#d4ba94" stroke-width="1" fill="none" opacity="0.4"/>
+            <!-- Comprimido tradicional (grande) -->
+            <ellipse cx="203" cy="265" rx="46" ry="28" fill="#ffffff" stroke="#c9b89d" stroke-width="1.2"/>
+            <ellipse cx="203" cy="261" rx="30" ry="13" fill="#f4ece0" opacity="0.6"/>
+            <line x1="170" y1="265" x2="236" y2="265" stroke="#d6c4a8" stroke-width="1" stroke-dasharray="2 3" opacity="0.7"/>
+          </svg>
+        </div>
+
+        <!-- Handle fixo no meio -->
+        <div class="ba-slider__handle" aria-hidden="true">
+          <span class="ba-slider__handle-knob">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+              <polyline points="9 18 15 12 9 6" transform="translate(8 0)"/>
+            </svg>
+          </span>
+        </div>
+
+        <!-- Labels -->
+        <span class="ba-slider__label ba-slider__label--before">Comprimido tradicional</span>
+        <span class="ba-slider__label ba-slider__label--after">Nanocomprimido Nanovit</span>
+
+        <!-- Disclaimer -->
+        <span class="ba-slider__disclaimer">Imagem ilustrativa · foto de produção pendente</span>
+
+      </div>
+    </div>
+
+    <!-- COLUNA DIREITA — Copy -->
+    <div class="tech-nano__copy">
+      <span class="section__eyebrow">Tecnologia Nanovit</span>
+      <h2>Menor. Mastigável. <em>Pra absorver já na boca.</em></h2>
+      <p>O nanocomprimido Nanovit é menor que um comprimido tradicional e foi feito pra ser mastigado. A absorção começa pela mucosa oral, antes de chegar ao estômago.</p>
+
+      <ul class="tech-nano__bullets">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Mastigável, com sabor agradável
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Sem precisar de água
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Absorção começa pela boca
+        </li>
+      </ul>
+
+      <p class="tech-nano__note">Hoje na linha <strong>Melatonina</strong> e <strong>D3 + K2</strong>.</p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  (function(){
+    const slider = document.getElementById('baSlider');
+    if (!slider) return;
+
+    let dragging = false;
+
+    function setPos(clientX) {
+      const rect = slider.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const pct = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      slider.style.setProperty('--pos', pct + '%');
+    }
+
+    function start(e) {
+      dragging = true;
+      slider.classList.add('is-dragging');
+      slider.setPointerCapture(e.pointerId);
+      setPos(e.clientX);
+    }
+    function move(e) {
+      if (!dragging) return;
+      setPos(e.clientX);
+    }
+    function end(e) {
+      if (!dragging) return;
+      dragging = false;
+      slider.classList.remove('is-dragging');
+      try { slider.releasePointerCapture(e.pointerId); } catch (_) {}
+    }
+
+    slider.addEventListener('pointerdown', start);
+    slider.addEventListener('pointermove', move);
+    slider.addEventListener('pointerup', end);
+    slider.addEventListener('pointercancel', end);
+    slider.addEventListener('pointerleave', end);
+  })();
+</script>
+
+</body>
+</html>

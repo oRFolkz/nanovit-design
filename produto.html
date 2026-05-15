@@ -961,6 +961,32 @@
     width: 100%; height: 100%;
     object-fit: cover;
   }
+  .pdf-link:hover { color: var(--color-text); text-decoration: underline; text-underline-offset: 3px; }
+  .indicam-ugc__caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 28px 16px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 60%, transparent 100%);
+    color: #fff;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .indicam-ugc__caption-name {
+    display: block;
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    margin-bottom: 4px;
+    color: rgba(255,255,255,0.92);
+  }
+  .indicam-ugc__caption-quote {
+    font-style: italic;
+    font-size: 13px;
+    line-height: 1.35;
+    margin: 0;
+    text-wrap: balance;
+  }
   .indicam-ugc__product {
     display: flex;
     align-items: center;
@@ -2215,6 +2241,10 @@
     .footer__top { grid-template-columns: 1fr 1fr; }
     .pdp__title { font-size: 32px; }
   }
+  @media (max-width: 900px) {
+    .forms-map { grid-template-columns: repeat(2, 1fr) !important; }
+    .forms-map .form-card:last-child { grid-column: 1 / -1; }
+  }
   @media (max-width: 768px) {
     .header__menu-toggle { display: inline-flex; }
     .header { grid-template-columns: 1fr auto 1fr !important; padding: 8px 12px !important; gap: 8px !important; }
@@ -2575,7 +2605,7 @@
   <div class="pdp__col">
     <span class="pdp__eyebrow">Mais popular em Magnésio</span>
     <h1 class="pdp__title">Nano 5Mag | 5 formas de magnésio</h1>
-    <p class="pdp__desc">Combinação inteligente de cinco quelatos de magnésio (Bisglicinato, Dimalato, Treonato, L-Treonato e Citrato) para acolher sono, energia, intestino e clareza mental em uma única cápsula de alta absorção.</p>
+    <p class="pdp__desc">5 formas de magnésio numa cápsula só. Cada uma atua num sistema diferente: sono, energia, coração, imunidade e digestão. A cobertura completa que magnésio simples não dá.</p>
 
     <div class="pdp__rating">
       <span class="pdp__rating-stars">★★★★★</span>
@@ -2595,7 +2625,7 @@
         <div class="pdp__benefit-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
         </div>
-        <span class="pdp__benefit-label">Mais energia &amp; disposição</span>
+        <span class="pdp__benefit-label">Mais energia para o dia</span>
       </div>
       <div class="pdp__benefit">
         <div class="pdp__benefit-icon">
@@ -2607,7 +2637,7 @@
         <div class="pdp__benefit-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
-        <span class="pdp__benefit-label">Coração &amp; saúde cerebral</span>
+        <span class="pdp__benefit-label">Coração equilibrado</span>
       </div>
     </div>
 
@@ -2716,7 +2746,7 @@
     </button>
     <a href="#" class="pdp__specialist">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-      Falar com especialista
+      Tirar dúvida com nutricionista
     </a>
 
     <!-- Trust row -->
@@ -2733,7 +2763,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
         Fabricado no Brasil
       </span>
-      <span class="trust__anvisa">Aprovado ANVISA</span>
+      <span class="trust__anvisa">Notificado ANVISA</span>
     </div>
 
     <!-- Mini review -->
@@ -2779,13 +2809,13 @@
         <span class="composition__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </span>
-        L-Treonato de Magnésio
+        Cloreto de Magnésio
       </div>
       <div class="composition__item">
         <span class="composition__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </span>
-        Citrato de Magnésio
+        Óxido de Magnésio
       </div>
       <div class="composition__item">
         <span class="composition__icon">
@@ -2820,7 +2850,7 @@
         </span>
       </div>
       <div class="composition__item">
-        Óxido de magnésio
+        Soja
         <span class="composition__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </span>
@@ -2861,31 +2891,119 @@
     <article class="indicam-ugc">
       <a href="#" class="indicam-ugc__video" aria-label="Ver vídeo de Aline">
         <video class="indicam-ugc__bg" data-hls="https://nexgeniusstore.myshopify.com/cdn/shop/videos/c/vp/f981c2de1bac4c17af2ab43eb1c48431/f981c2de1bac4c17af2ab43eb1c48431.m3u8?v=0" muted autoplay loop playsinline></video>
+        <div class="indicam-ugc__caption">
+          <span class="indicam-ugc__caption-name">Aline · 34 anos</span>
+          <p class="indicam-ugc__caption-quote">"Em 3 semanas dormindo a noite inteira."</p>
+        </div>
       </a>
     </article>
 
     <article class="indicam-ugc">
       <a href="#" class="indicam-ugc__video" aria-label="Ver vídeo de Marina">
         <video class="indicam-ugc__bg" data-hls="https://nexgeniusstore.myshopify.com/cdn/shop/videos/c/vp/aabccc6df7fd4883a306c252efe6a825/aabccc6df7fd4883a306c252efe6a825.m3u8?v=0" muted autoplay loop playsinline></video>
+        <div class="indicam-ugc__caption">
+          <span class="indicam-ugc__caption-name">Marina · 41 anos</span>
+          <p class="indicam-ugc__caption-quote">"Acabou a câimbra de madrugada."</p>
+        </div>
       </a>
     </article>
 
     <article class="indicam-ugc">
       <a href="#" class="indicam-ugc__video" aria-label="Ver vídeo de Júlia">
         <video class="indicam-ugc__bg" data-hls="https://nexgeniusstore.myshopify.com/cdn/shop/videos/c/vp/b824df2d78a9426a86681a8516a42b15/b824df2d78a9426a86681a8516a42b15.m3u8?v=0" muted autoplay loop playsinline></video>
+        <div class="indicam-ugc__caption">
+          <span class="indicam-ugc__caption-name">Júlia · 38 anos</span>
+          <p class="indicam-ugc__caption-quote">"Mais energia para acabar o dia."</p>
+        </div>
       </a>
     </article>
 
     <article class="indicam-ugc">
       <a href="#" class="indicam-ugc__video" aria-label="Ver vídeo de Camila">
         <video class="indicam-ugc__bg" data-hls="https://nexgeniusstore.myshopify.com/cdn/shop/videos/c/vp/012f3b4351b64e66a244bed0c15cb785/012f3b4351b64e66a244bed0c15cb785.m3u8?v=0" muted autoplay loop playsinline></video>
+        <div class="indicam-ugc__caption">
+          <span class="indicam-ugc__caption-name">Camila · 45 anos</span>
+          <p class="indicam-ugc__caption-quote">"Trocou meu bisglicinato simples."</p>
+        </div>
       </a>
     </article>
 
     <article class="indicam-ugc">
       <a href="#" class="indicam-ugc__video" aria-label="Ver vídeo de Sofia">
         <video class="indicam-ugc__bg" data-hls="https://nexgeniusstore.myshopify.com/cdn/shop/videos/c/vp/fdac23c9e5c249799a29d7f0046c7826/fdac23c9e5c249799a29d7f0046c7826.m3u8?v=0" muted autoplay loop playsinline></video>
+        <div class="indicam-ugc__caption">
+          <span class="indicam-ugc__caption-name">Sofia · 36 anos</span>
+          <p class="indicam-ugc__caption-quote">"Ansiedade baixou junto com o sono melhor."</p>
+        </div>
       </a>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 5 FORMAS, 5 SISTEMAS ============ -->
+<section class="section container" aria-label="5 formas, 5 sistemas">
+  <div class="section__head" style="justify-content:center;text-align:center;">
+    <div class="section__title-block" style="text-align:center;margin:0 auto;">
+      <span class="section__eyebrow">Cobertura completa</span>
+      <h2 class="section__title">5 formas. 5 sistemas. <em>1 cápsula.</em></h2>
+      <p class="section__sub" style="margin:8px auto 0;max-width:620px;">Cada forma de magnésio tem afinidade com um sistema do corpo. Tomar uma forma só cobre uma fração. O 5MAG cobre tudo em uma dose.</p>
+    </div>
+  </div>
+
+  <div class="forms-map" style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:36px;">
+    <article class="form-card" style="background:var(--color-cream);border-radius:var(--radius-lg);padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <span style="width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--color-brand);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </span>
+      <div>
+        <span style="display:block;font-family:var(--font-title);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-mute);margin-bottom:4px;">Bisglicinato</span>
+        <h4 style="font-family:var(--font-title);font-weight:700;font-size:15px;color:var(--color-text);margin:0;">Sistema Nervoso</h4>
+      </div>
+      <p style="font-size:13px;color:var(--color-mute);line-height:1.5;margin:0;">Para o sono e a ansiedade.</p>
+    </article>
+
+    <article class="form-card" style="background:var(--color-cream);border-radius:var(--radius-lg);padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <span style="width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--color-brand);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </span>
+      <div>
+        <span style="display:block;font-family:var(--font-title);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-mute);margin-bottom:4px;">Dimalato</span>
+        <h4 style="font-family:var(--font-title);font-weight:700;font-size:15px;color:var(--color-text);margin:0;">Energia Celular</h4>
+      </div>
+      <p style="font-size:13px;color:var(--color-mute);line-height:1.5;margin:0;">Para músculos e fadiga.</p>
+    </article>
+
+    <article class="form-card" style="background:var(--color-cream);border-radius:var(--radius-lg);padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <span style="width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--color-brand);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </span>
+      <div>
+        <span style="display:block;font-family:var(--font-title);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-mute);margin-bottom:4px;">Cloreto</span>
+        <h4 style="font-family:var(--font-title);font-weight:700;font-size:15px;color:var(--color-text);margin:0;">Sistema Imune</h4>
+      </div>
+      <p style="font-size:13px;color:var(--color-mute);line-height:1.5;margin:0;">Para imunidade e absorção.</p>
+    </article>
+
+    <article class="form-card" style="background:var(--color-cream);border-radius:var(--radius-lg);padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <span style="width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--color-brand);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </span>
+      <div>
+        <span style="display:block;font-family:var(--font-title);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-mute);margin-bottom:4px;">Taurato</span>
+        <h4 style="font-family:var(--font-title);font-weight:700;font-size:15px;color:var(--color-text);margin:0;">Coração</h4>
+      </div>
+      <p style="font-size:13px;color:var(--color-mute);line-height:1.5;margin:0;">Para coração e pressão.</p>
+    </article>
+
+    <article class="form-card" style="background:var(--color-cream);border-radius:var(--radius-lg);padding:28px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <span style="width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--color-brand);">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:26px;height:26px;"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3c.5.12 1 .23 1.5.3C19 22 22 16.5 22 10c0-1-1-2-2-2-3 0-3 0-3 0z"/><path d="M22 8s-2-3-5-3"/></svg>
+      </span>
+      <div>
+        <span style="display:block;font-family:var(--font-title);font-weight:700;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-mute);margin-bottom:4px;">Óxido</span>
+        <h4 style="font-family:var(--font-title);font-weight:700;font-size:15px;color:var(--color-text);margin:0;">Digestão</h4>
+      </div>
+      <p style="font-size:13px;color:var(--color-mute);line-height:1.5;margin:0;">Para intestino e base de dose.</p>
     </article>
   </div>
 </section>
@@ -2897,13 +3015,13 @@
       <span class="section__eyebrow" style="margin-bottom:14px;">Entenda o magnésio</span>
       <h3 style="font-family:var(--font-title);font-weight:700;font-size:24px;line-height:1.15;color:var(--color-text);letter-spacing:-0.02em;margin-bottom:14px;text-wrap:balance;">O que é o magnésio<br>e para que <em style="font-style:normal;color:var(--color-brand);">ele serve</em>?</h3>
       <p style="font-size:14px;color:var(--color-mute);line-height:1.55;max-width:480px;margin-bottom:24px;">O magnésio é o quarto mineral mais abundante do corpo e participa de mais de <strong style="color:var(--color-text);">300 reações enzimáticas</strong> — do sono à contração muscular, do metabolismo de energia à saúde óssea. Entender as 5 formas químicas é o que faz toda a diferença.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;">
         <a href="#" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-brand);color:#fff;padding:12px 22px;border-radius:var(--radius-pill);font-family:var(--font-title);font-weight:600;font-size:12px;text-decoration:none;transition:background 0.2s;">
           <span>Ler o artigo completo</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="#" style="display:inline-flex;align-items:center;gap:8px;color:var(--color-text);padding:12px 22px;border-radius:var(--radius-pill);font-family:var(--font-title);font-weight:600;font-size:12px;text-decoration:none;border:1px solid rgba(42,28,26,0.2);transition:background 0.2s;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <a href="#" class="pdf-link" style="display:inline-flex;align-items:center;gap:6px;color:var(--color-mute);font-family:var(--font-title);font-weight:500;font-size:12px;text-decoration:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span>Baixar guia em PDF</span>
         </a>
       </div>
@@ -2927,7 +3045,7 @@
     <div style="padding:56px;display:flex;flex-direction:column;justify-content:center;">
       <span class="section__eyebrow" style="margin-bottom:14px;">Modo de uso</span>
       <h3 style="font-family:var(--font-title);font-weight:700;font-size:24px;line-height:1.15;color:var(--color-text);letter-spacing:-0.02em;margin-bottom:14px;text-wrap:balance;">Como usar o <em style="font-style:normal;color:var(--color-brand);">Nano 5Mag</em><br>para ter os melhores resultados.</h3>
-      <p style="font-size:14px;color:var(--color-mute);line-height:1.55;max-width:480px;margin-bottom:24px;">Dose padrão: <strong style="color:var(--color-text);">2 cápsulas 30 minutos antes de dormir</strong>, com um copo de água. Pode ser tomado com ou sem alimento. Os efeitos no sono e relaxamento aparecem em 7–10 dias; ganhos cognitivos do Treonato em até 4 semanas.</p>
+      <p style="font-size:14px;color:var(--color-mute);line-height:1.55;max-width:480px;margin-bottom:24px;">Dose padrão: <strong style="color:var(--color-text);">2 cápsulas 30 minutos antes de dormir</strong>, com um copo de água. Pode ser tomado com ou sem alimento. Os efeitos no sono e relaxamento aparecem em 7–10 dias; ganhos cardiovasculares do Taurato em até 4 semanas.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
         <a href="#" style="display:inline-flex;align-items:center;gap:8px;background:var(--color-brand);color:#fff;padding:12px 22px;border-radius:var(--radius-pill);font-family:var(--font-title);font-weight:600;font-size:12px;text-decoration:none;transition:background 0.2s;">
           <span>Ver protocolo completo</span>
@@ -3046,13 +3164,13 @@
       </div>
       <div class="diag-cause__item">
         <span class="diag-cause__num">02</span>
-        <h4>Não absorvíveis</h4>
-        <p>Óxido de magnésio tem apenas 4% de biodisponibilidade. Você toma, mas o corpo não usa.</p>
+        <h4>Pouco absorvíveis</h4>
+        <p>Magnésio comum, em forma isolada, tem absorção limitada. O corpo aproveita só uma parte. No 5MAG, cada forma entra junto e é absorvida onde precisa.</p>
       </div>
       <div class="diag-cause__item">
         <span class="diag-cause__num">03</span>
-        <h4>5 sistemas afetados</h4>
-        <p>Cada forma atua em um sistema: sono, músculo, intestino, coração e cérebro.</p>
+        <h4>5 sistemas, 5 formas</h4>
+        <p>Cada forma atua num sistema: sono, energia, imunidade, coração e digestão.</p>
       </div>
     </div>
   </div>
@@ -3106,8 +3224,8 @@
             <span class="review__date">há 2 semanas</span>
           </div>
           <div class="review__stars">★★★★★</div>
-          <h4 class="review__title">Doze semanas e os côlicos noturnos passaram</h4>
-          <p class="review__body">Tomo todas as noites antes de dormir. Tirou a câimbra, melhorou muito do sono. 7 dias depois eu já notei a diferença, foram-se as agonias. Recomendo sem medo.</p>
+          <h4 class="review__title">Doze semanas e as câimbras noturnas passaram</h4>
+          <p class="review__body">Tomo todas as noites antes de dormir. Tirou as câimbras e melhorou muito o sono. 7 dias depois já notei a diferença. Recomendo sem medo.</p>
         </div>
       </article>
 
@@ -3120,8 +3238,8 @@
             <span class="review__date">há 3 semanas</span>
           </div>
           <div class="review__stars">★★★★★</div>
-          <h4 class="review__title">Relaxa rapidão. Notei o como melhorou na primeira semana</h4>
-          <p class="review__body">Procurei muito pra escolher e o Nano 5Mag entregou tudo o que prometeu. Levanto melhor, durmo bem, e até a ansiedade caiu bastante. Vou continuar.</p>
+          <h4 class="review__title">Relaxa rápido. Já notei diferença na primeira semana.</h4>
+          <p class="review__body">Pesquisei bastante antes de escolher e o Nano 5Mag entregou tudo o que prometeu. Acordo melhor, durmo bem e até a ansiedade caiu bastante. Vou continuar.</p>
         </div>
       </article>
 
@@ -3135,7 +3253,7 @@
           </div>
           <div class="review__stars">★★★★★</div>
           <h4 class="review__title">Diferença natural em comparação com o bisglicinato simples</h4>
-          <p class="review__body">Tomava magnésio puro só, mudei pra junto e a diferença em energia foi enorme. Eu tinha 1h de hora extra muito complicada de fazer no fim do dia.</p>
+          <p class="review__body">Tomava só bisglicinato simples e mudei pro blend. A diferença em energia foi grande. Aquela última hora do dia que travava acabou.</p>
         </div>
       </article>
 
@@ -3148,8 +3266,8 @@
             <span class="review__date">há 1 mês</span>
           </div>
           <div class="review__stars">★★★★☆</div>
-          <h4 class="review__title">Escolhi pelo barato. Fiquei pelo resultado completo</h4>
-          <p class="review__body">Não sou simpático com suplementos de magnésio puro, achei muito complicado dormir, mas o 5MAG cumpriu tudo. Eu sigo tomando.</p>
+          <h4 class="review__title">Escolhi pelo preço. Fiquei pelo resultado.</h4>
+          <p class="review__body">Já tinha tentado magnésio simples e não funcionou. O 5MAG cumpriu o que prometeu. Sigo tomando.</p>
         </div>
       </article>
 
@@ -3177,7 +3295,7 @@
           Por que existem 5 formas diferentes de magnésio?
           <span class="faq__q-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </button>
-        <div class="faq__a">Cada forma química de magnésio chega a um tecido diferente. Bisglicinato age no sistema nervoso central; Dimalato nos músculos; Treonato no cérebro; Citrato no intestino; Taurato no coração. Tomar apenas uma forma significa cobrir só uma fração dos sintomas.</div>
+        <div class="faq__a">Cada forma química de magnésio chega a um tecido diferente. Bisglicinato age no sistema nervoso e sono; Dimalato nos músculos e mitocôndrias; Cloreto no sistema imune e absorção; Taurato no coração; Óxido no trato gastrointestinal. Tomar apenas uma forma significa cobrir só uma fração dos sintomas.</div>
       </div>
       <div class="faq__item">
         <button class="faq__q">
@@ -3247,9 +3365,9 @@
             <td>0%</td>
           </tr>
           <tr>
-            <td>Magnésio (blend de 5 formas)<br><span style="font-size:11px;color:var(--color-mute);font-weight:400;">Bisglicinato · Dimalato · Treonato · Citrato · Taurato</span></td>
-            <td>300 mg</td>
-            <td>71%</td>
+            <td>Magnésio (blend de 5 formas)<br><span style="font-size:11px;color:var(--color-mute);font-weight:400;">Bisglicinato · Dimalato · Cloreto · Taurato · Óxido</span></td>
+            <td>260 mg</td>
+            <td>62%</td>
           </tr>
           <tr>
             <td>Vitamina B6 (Piridoxal-5-fosfato)</td>
@@ -3276,7 +3394,7 @@
         <a href="index.html" aria-label="Nanovit" style="display:inline-block;margin-bottom:20px;">
           <img src="https://nexgeniusstore.myshopify.com/cdn/shop/files/nanovit-suplementos-e-vitaminas-icon.webp?v=1777382021&width=240" alt="Nanovit" style="height:36px;width:auto;display:block;filter:brightness(0) invert(1);">
         </a>
-        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:320px;margin-bottom:24px;">Fórmulas integrativas com múltiplos ativos para quem quer resultado real. Desenvolvidas com especialistas, aprovadas pela ANVISA.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:320px;margin-bottom:24px;">Fórmulas integrativas com múltiplos ativos para quem quer resultado real. Desenvolvidas com especialistas, notificadas na ANVISA.</p>
         <div style="display:flex;gap:10px;">
           <a href="#" aria-label="Instagram" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.08);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;transition:background 0.2s ease;">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
