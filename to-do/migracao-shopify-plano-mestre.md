@@ -37,9 +37,9 @@ A migração **não é** "transformar cada HTML em Liquid". Horizon já é um te
 
 | Fase | Brief | Saída |
 |---|---|---|
-| **0** | [migracao-fase-0-fundacao.md](migracao-fase-0-fundacao.md) | Tokens de marca aplicados. Horizon "vestido" de Nanovit em fontes, cores, radii, espaçamentos. |
-| **1** | _(a abrir após Fase 0)_ | Catálogo de metafields necessários (produto + página + shop) documentado para criação no admin. |
-| **2** | _(a abrir após Fase 1)_ | PDP Nano 5Mag: `templates/product.nano-5mag.json` + sections/blocks Nanovit customizados (perks, cashback, calc frete, benefits, trust row, FAQ, mini-review, tech demo). |
+| **0** | [migracao-fase-0-fundacao.md](migracao-fase-0-fundacao.md) + [polimento](migracao-fase-0-polimento.md) | Tokens de marca aplicados. Horizon "vestido" de Nanovit em fontes, cores, radii, espaçamentos. **Status: concluído.** |
+| ~~**1**~~ | ~~_(catálogo de metafields)_~~ | **Obsoleto.** Decidimos pivotar para copy/estrutura hard-coded em Liquid com `settings` expostos via schema (defaults preenchidos). Metafields entram só onde fizer sentido genuíno (ex: rating médio, contagem de estoque). Vai mais rápido, entrega site visualmente pronto sem dependência de admin. |
+| **2** | [migracao-fase-2-pdp-5mag.md](migracao-fase-2-pdp-5mag.md) | PDP Nano 5Mag: `templates/product.nano-5mag.json` + sections `nanovit-*` (gallery, buy-box c/ calc-frete, composição, FAQ, reviews, bundle, symptoms, nutrition). Copy hard-coded fiel ao mock HTML. |
 | **3** | _(a abrir após Fase 2)_ | Home (`templates/index.json`) + 404 (`templates/404.json`). |
 | **4** | _(a abrir após Fase 3)_ | Páginas institucionais: Políticas, Termos, Central de Atendimento, Seja Afiliado, Seja Prescritor. Cada uma com seu template. |
 
