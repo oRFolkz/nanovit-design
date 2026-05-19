@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Seja um prescritor — Nanovit Nutrition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-title: 'Montserrat Alternates', sans-serif;
+    --font-sub:   'Montserrat Alternates', sans-serif;
+    --font-body:  'Montserrat Alternates', sans-serif;
+    --font-weight-title: 600;
+    --font-weight-body: 400;
+    --size-title: clamp(36px, 4.2vw, 56px);
+    --size-sub: clamp(24px, 2.6vw, 34px);
+    --size-body: 15px;
+
+    --color-brand: #cc2b20;
+    --color-brand-hover: #b32419;
+    --color-brand-soft: #ffe9d9;
+    --color-bg: #ffffff;
+    --color-cream: #faf6f1;
+    --color-cream-2: #faf7f4;
+    --color-text: #2a1c1a;
+    --color-mute: #8a7a76;
+    --color-success: #1a4d2e;
+    --color-success-soft: rgba(26,77,46,0.08);
+
+    --radius-sm: 8px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 22px;
+    --radius-2xl: 28px;
+    --radius-pill: 999px;
+    --radius: 14px; /* legacy alias */
+
+    --container: 1320px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { overflow-x: clip; }
+  body {
+    padding-left: clamp(16px, 3vw, 32px);
+    padding-right: clamp(16px, 3vw, 32px);
+    font-family: var(--font-body);
+    font-weight: var(--font-weight-body);
+    font-size: 15px;
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+  img { max-width: 100%; display: block; }
+
+  .shell {
+    max-width: var(--container);
+    margin: calc(var(--size-body) * 2) auto;
+    padding: 0 calc(var(--size-body) * 1.5);
+  }
+
+  .top {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: calc(var(--size-body) * 1.5);
+  }
+
+  /* SIDEBAR */
+  .nav-card {
+    background: var(--color-bg);
+    border-radius: var(--radius);
+    padding: calc(var(--size-body) * 1.5);
+    box-shadow: 0 1px 3px color-mix(in oklab, var(--color-text) 8%, transparent);
+    align-self: start;
+    position: sticky;
+    top: calc(var(--size-body) * 1.5);
+  }
+  .nav-card__brand {
+    display: flex; align-items: center; gap: calc(var(--size-body) * 0.6);
+    padding-bottom: calc(var(--size-body) * 1.25);
+    margin-bottom: calc(var(--size-body) * 1);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-text) 10%, transparent);
+  }
+  .nav-card__logo {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--color-brand);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-bg);
+  }
+  .nav-card__logo svg { width: 18px; height: 18px; }
+  .nav-card__brand-text {
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: calc(var(--size-body) * 0.95);
+    line-height: 1.1;
+  }
+  .nav-card__brand-text small {
+    display: block;
+    font-weight: 500;
+    color: color-mix(in oklab, var(--color-text) 55%, var(--color-bg));
+    font-size: calc(var(--size-body) * 0.78);
+  }
+  .nav-card__group-label {
+    font-size: calc(var(--size-body) * 0.7);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--color-text) 50%, var(--color-bg));
+    padding: calc(var(--size-body) * 0.85) calc(var(--size-body) * 0.85) calc(var(--size-body) * 0.4);
+  }
+  .nav-card__list { display: flex; flex-direction: column; gap: 2px; }
+  .nav-card__item {
+    display: flex; align-items: center;
+    gap: calc(var(--size-body) * 0.65);
+    padding: calc(var(--size-body) * 0.75) calc(var(--size-body) * 0.85);
+    border-radius: 8px;
+    font-size: calc(var(--size-body) * 0.92);
+    font-weight: 500;
+    color: color-mix(in oklab, var(--color-text) 80%, var(--color-bg));
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .nav-card__item:hover { background: color-mix(in oklab, var(--color-brand) 6%, var(--color-bg)); color: var(--color-text); }
+  .nav-card__item.is-active {
+    background: color-mix(in oklab, var(--color-brand) 10%, var(--color-bg));
+    color: var(--color-brand);
+    font-weight: 700;
+  }
+  .nav-card__item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* HERO */
+  .hero {
+    background: var(--color-brand);
+    color: var(--color-bg);
+    border-radius: var(--radius);
+    padding: calc(var(--size-body) * 3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: calc(var(--size-body) * 2);
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+  }
+  .hero::before, .hero::after {
+    content: ""; position: absolute;
+    border-radius: 50%;
+    border: 2px solid color-mix(in oklab, var(--color-bg) 25%, transparent);
+    pointer-events: none;
+  }
+  .hero::before { width: 320px; height: 320px; right: -80px; top: -100px; }
+  .hero::after { width: 140px; height: 140px; right: 120px; bottom: -50px; background: color-mix(in oklab, var(--color-bg) 12%, transparent); border-color: transparent; }
+  .hero__top { position: relative; z-index: 2; }
+  .hero__eyebrow {
+    font-size: calc(var(--size-body) * 0.78);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--color-bg) 88%, var(--color-brand));
+    margin-bottom: calc(var(--size-body) * 1);
+    display: inline-block;
+  }
+  .hero__title {
+    font-family: var(--font-title);
+    font-weight: var(--font-weight-title);
+    font-size: var(--size-title);
+    line-height: 1;
+    letter-spacing: -0.025em;
+    max-width: 600px;
+    position: relative; z-index: 2;
+  }
+  .hero__lead {
+    font-size: calc(var(--size-body) * 1.05);
+    max-width: 560px;
+    color: color-mix(in oklab, var(--color-bg) 90%, var(--color-brand));
+    position: relative; z-index: 2;
+  }
+  .hero__chips {
+    display: flex; flex-wrap: wrap;
+    gap: calc(var(--size-body) * 0.5);
+    position: relative; z-index: 2;
+  }
+  .hero__chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: calc(var(--size-body) * 0.55) calc(var(--size-body) * 0.95);
+    background: color-mix(in oklab, var(--color-bg) 18%, transparent);
+    border: 1px solid color-mix(in oklab, var(--color-bg) 35%, transparent);
+    border-radius: 999px;
+    font-size: calc(var(--size-body) * 0.82);
+    font-weight: 600;
+  }
+  .hero__chip svg { width: 12px; height: 12px; }
+
+  /* TIMELINE STEPS */
+  .steps {
+    margin-top: calc(var(--size-body) * 2);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: calc(var(--size-body) * 1);
+    position: relative;
+  }
+  .step {
+    background: var(--color-bg);
+    border-radius: var(--radius);
+    padding: calc(var(--size-body) * 1.5);
+    box-shadow: 0 1px 3px color-mix(in oklab, var(--color-text) 7%, transparent);
+    transition: box-shadow 0.18s ease;
+    position: relative;
+  }
+  .step:hover { box-shadow: 0 6px 18px color-mix(in oklab, var(--color-text) 10%, transparent); }
+  .step__num {
+    position: absolute;
+    top: calc(var(--size-body) * 1);
+    right: calc(var(--size-body) * 1.25);
+    font-family: var(--font-title);
+    font-weight: 900;
+    font-size: calc(var(--size-body) * 2.2);
+    color: color-mix(in oklab, var(--color-brand) 15%, var(--color-bg));
+    line-height: 1;
+  }
+  .step__icon {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: color-mix(in oklab, var(--color-brand) 10%, var(--color-bg));
+    color: var(--color-brand);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: calc(var(--size-body) * 1);
+  }
+  .step__icon svg { width: 22px; height: 22px; }
+  .step__title {
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: calc(var(--size-body) * 1.05);
+    color: var(--color-text);
+    margin-bottom: 6px;
+    letter-spacing: -0.005em;
+  }
+  .step__sub {
+    font-size: calc(var(--size-body) * 0.92);
+    color: color-mix(in oklab, var(--color-text) 75%, var(--color-bg));
+  }
+
+  /* POLICY CARDS */
+  .content { margin-top: calc(var(--size-body) * 2); display: flex; flex-direction: column; gap: calc(var(--size-body) * 1); }
+  .policy-card {
+    background: var(--color-bg);
+    border-radius: var(--radius);
+    padding: calc(var(--size-body) * 2);
+    box-shadow: 0 1px 3px color-mix(in oklab, var(--color-text) 7%, transparent);
+    transition: box-shadow 0.18s ease;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: calc(var(--size-body) * 1.5);
+    align-items: start;
+  }
+  .policy-card:hover { box-shadow: 0 6px 18px color-mix(in oklab, var(--color-text) 10%, transparent); }
+  .policy-card__icon {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    background: var(--color-brand);
+    color: var(--color-bg);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .policy-card__icon svg { width: 24px; height: 24px; }
+  .policy-card__title {
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: calc(var(--size-body) * 1.2);
+    margin-bottom: calc(var(--size-body) * 0.6);
+    letter-spacing: -0.005em;
+  }
+  .policy-card__body p {
+    font-size: calc(var(--size-body) * 0.98);
+    color: color-mix(in oklab, var(--color-text) 82%, var(--color-bg));
+    margin-bottom: calc(var(--size-body) * 0.5);
+  }
+  .policy-card__body p:last-child { margin-bottom: 0; }
+  .policy-card__body strong { color: var(--color-text); font-weight: 700; }
+
+  /* FORM (prescriber-specific) */
+  .form-card {
+    background: var(--color-bg);
+    border-radius: var(--radius);
+    padding: calc(var(--size-body) * 2);
+    box-shadow: 0 1px 3px color-mix(in oklab, var(--color-text) 7%, transparent);
+    margin-top: calc(var(--size-body) * 1);
+  }
+  .form-card__title {
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: calc(var(--size-body) * 1.25);
+    margin-bottom: calc(var(--size-body) * 0.4);
+    letter-spacing: -0.005em;
+  }
+  .form-card__sub {
+    font-size: calc(var(--size-body) * 0.95);
+    color: color-mix(in oklab, var(--color-text) 70%, var(--color-bg));
+    margin-bottom: calc(var(--size-body) * 1.5);
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: calc(var(--size-body) * 1);
+  }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field--full { grid-column: 1 / -1; }
+  .form-field label {
+    font-size: calc(var(--size-body) * 0.85);
+    font-weight: 600;
+    color: color-mix(in oklab, var(--color-text) 80%, var(--color-bg));
+    letter-spacing: 0.01em;
+  }
+  .form-field label .req { color: var(--color-brand); }
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    font-family: var(--font-body);
+    font-size: var(--size-body);
+    color: var(--color-text);
+    padding: calc(var(--size-body) * 0.75) calc(var(--size-body) * 0.9);
+    border: 1px solid color-mix(in oklab, var(--color-text) 15%, transparent);
+    border-radius: 8px;
+    background: var(--color-bg);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    outline: none;
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--color-brand) 15%, transparent);
+  }
+  .form-field textarea { resize: vertical; min-height: 100px; }
+  .form-consent {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: calc(var(--size-body) * 0.88);
+    color: color-mix(in oklab, var(--color-text) 75%, var(--color-bg));
+    margin-top: calc(var(--size-body) * 0.5);
+  }
+  .form-consent input { margin-top: 3px; accent-color: var(--color-brand); }
+  .form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: calc(var(--size-body) * 0.5);
+  }
+  .form-submit {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--color-brand);
+    color: var(--color-bg);
+    border: none;
+    cursor: pointer;
+    padding: calc(var(--size-body) * 0.95) calc(var(--size-body) * 1.6);
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: calc(var(--size-body) * 0.95);
+    transition: background 0.18s ease, box-shadow 0.18s ease;
+  }
+  .form-submit:hover { background: color-mix(in oklab, var(--color-brand) 85%, #000); box-shadow: 0 6px 16px color-mix(in oklab, var(--color-brand) 30%, transparent); }
+  .form-submit svg { width: 14px; height: 14px; }
+
+  /* Notice */
+  .notice {
+    margin-top: calc(var(--size-body) * 2);
+    background: color-mix(in oklab, var(--color-brand) 5%, var(--color-bg));
+    border-left: 3px solid var(--color-brand);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: calc(var(--size-body) * 1.25) calc(var(--size-body) * 1.5);
+    font-size: calc(var(--size-body) * 0.95);
+  }
+  .notice strong { color: var(--color-brand); font-weight: 800; }
+
+  /* Company */
+  .company {
+    margin-top: calc(var(--size-body) * 3);
+    padding-top: calc(var(--size-body) * 2);
+    border-top: 1px solid color-mix(in oklab, var(--color-text) 12%, transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--size-body);
+    flex-wrap: wrap;
+  }
+  .company__name {
+    font-family: var(--font-title);
+    font-weight: 900;
+    font-size: calc(var(--size-body) * 1.05);
+    letter-spacing: 0.02em;
+  }
+  .company__cnpj {
+    font-size: calc(var(--size-body) * 0.9);
+    color: color-mix(in oklab, var(--color-text) 65%, var(--color-bg));
+    font-weight: 500;
+  }
+  .company__cnpj b { color: var(--color-text); font-weight: 700; letter-spacing: 0.04em; }
+
+  @media (max-width: 1024px) {
+    .top { grid-template-columns: 1fr; }
+    .nav-card { position: static; }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .steps { grid-template-columns: 1fr; }
+    .policy-card { grid-template-columns: 1fr; }
+    .hero { padding: calc(var(--size-body) * 2); }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+  /* ============ RESKIN OVERRIDES ============ */
+  h1, h2, h3, h4, h5 { font-family: var(--font-title); letter-spacing: -0.01em; }
+  h1, h2, h3 { font-weight: 600 !important; }
+  .shell { max-width: var(--container) !important; }
+  strong, b { font-weight: 600; }
+
+  /* ============ MARQUEE ============ */
+  .marquee { margin-left: calc(-1 * clamp(16px, 3vw, 32px)); margin-right: calc(-1 * clamp(16px, 3vw, 32px)); background: var(--color-brand); color: #fff; overflow: hidden; height: 36px; display: flex; align-items: center; }
+  .marquee__track { display: flex; gap: 0; white-space: nowrap; animation: scroll 32s linear infinite; }
+  .marquee__item { display: inline-flex; align-items: center; gap: 24px; padding: 0 24px; font-family: var(--font-title); font-weight: 600; font-size: 12px; letter-spacing: 0.06em; }
+  .marquee__sep { opacity: 0.55; font-size: 10px; }
+  @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ============ HEADER ============ */
+  .header-wrap { position: sticky; top: 16px; z-index: 100; padding: 20px 0 12px; }
+  .header-shell { max-width: var(--container); margin: 0 auto; background: rgba(255,255,255,0.92); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border: 1px solid rgba(42,28,26,0.08); border-radius: 32px; box-shadow: 0 12px 32px -16px rgba(42,28,26,0.18); }
+  .header { padding: 16px 14px 14px 24px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; }
+  .header__logo img { height: 32px; width: auto; display: block; }
+  .header__search { position: relative; display: flex; align-items: center; }
+  .header__search input { width: 100%; height: 42px; border: 1px solid rgba(42,28,26,0.1); border-radius: var(--radius-pill); padding: 0 18px 0 44px; font-family: inherit; font-size: 13px; color: var(--color-text); background: rgba(255,255,255,0.6); outline: none; }
+  .header__search input:focus { border-color: var(--color-text); background: #fff; }
+  .header__search input::placeholder { color: var(--color-mute); }
+  .header__search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--color-mute); pointer-events: none; }
+  .header__search-icon svg { width: 16px; height: 16px; }
+  .header__actions { display: flex; align-items: center; gap: 6px; }
+  .header__action { display: flex; align-items: center; gap: 8px; padding: 8px 14px; font-family: var(--font-title); font-weight: 600; font-size: 12px; border-radius: var(--radius-pill); transition: background 0.2s; }
+  .header__action:hover { background: rgba(42,28,26,0.05); }
+  .header__action svg { width: 16px; height: 16px; }
+  .header__cart { position: relative; width: 42px; height: 42px; border-radius: 50%; background: var(--color-brand); color: #fff; display: flex; align-items: center; justify-content: center; margin-left: 4px; }
+  .header__cart svg { width: 18px; height: 18px; }
+  .header__cart-badge { position: absolute; top: -2px; right: -2px; background: var(--color-brand); color: #fff; width: 18px; height: 18px; border-radius: 50%; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; }
+  .nav-strip { padding: 10px 14px 14px; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+  .nav-strip__pill { padding: 8px 16px; border-radius: var(--radius-pill); font-family: var(--font-title); font-weight: 600; font-size: 12px; color: var(--color-text); white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; transition: background 0.2s; }
+  .nav-strip__pill:hover { background: var(--color-cream); }
+  .nav-strip__pill svg { width: 12px; height: 12px; }
+  body.is-scrolled .header-wrap { top: 6px; padding: 8px 0 6px; }
+  body.is-scrolled .header-shell { box-shadow: 0 8px 24px -12px rgba(42,28,26,0.22); }
+
+  /* ============ MOBILE MENU ============ */
+  .header__menu-toggle { display: none; width: 40px; height: 40px; border-radius: 50%; background: transparent; color: var(--color-text); align-items: center; justify-content: center; border: none; cursor: pointer; flex-shrink: 0; }
+  .header__menu-toggle svg { width: 22px; height: 22px; }
+  .mobile-menu { position: fixed; inset: 0; z-index: 200; pointer-events: none; visibility: hidden; }
+  .mobile-menu[aria-hidden="false"] { pointer-events: auto; visibility: visible; }
+  .mobile-menu__backdrop { position: absolute; inset: 0; background: rgba(42,28,26,0.42); opacity: 0; transition: opacity 0.25s ease; }
+  .mobile-menu[aria-hidden="false"] .mobile-menu__backdrop { opacity: 1; }
+  .mobile-menu__panel { position: absolute; top: 0; left: 0; bottom: 0; width: min(86vw, 360px); background: #fff; display: flex; flex-direction: column; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1); box-shadow: 4px 0 24px -8px rgba(42,28,26,0.18); }
+  .mobile-menu[aria-hidden="false"] .mobile-menu__panel { transform: translateX(0); }
+  .mobile-menu__head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid rgba(42,28,26,0.08); flex-shrink: 0; }
+  .mobile-menu__logo img { height: 28px; width: auto; display: block; }
+  .mobile-menu__close { width: 36px; height: 36px; border-radius: 50%; border: none; background: transparent; color: var(--color-text); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .mobile-menu__close svg { width: 20px; height: 20px; }
+  .mobile-menu__search { position: relative; padding: 16px 20px 8px; flex-shrink: 0; }
+  .mobile-menu__search svg { position: absolute; left: 32px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--color-mute); }
+  .mobile-menu__search input { width: 100%; height: 44px; border-radius: 999px; border: 1px solid rgba(42,28,26,0.12); background: var(--color-cream); padding: 0 18px 0 44px; font-family: inherit; font-size: 13px; color: var(--color-text); outline: none; }
+  .mobile-menu__nav { display: flex; flex-direction: column; padding: 8px 12px; flex: 1; overflow-y: auto; }
+  .mobile-menu__link { display: block; padding: 14px 12px; font-family: var(--font-title); font-weight: 600; font-size: 15px; color: var(--color-text); text-decoration: none; border-radius: 10px; }
+  .mobile-menu__link--primary { background: var(--color-brand); color: #fff; margin-bottom: 4px; }
+  .mobile-menu__foot { padding: 16px 20px 24px; border-top: 1px solid rgba(42,28,26,0.08); display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+  .mobile-menu__action { display: flex; align-items: center; gap: 12px; padding: 12px 8px; font-family: var(--font-title); font-weight: 500; font-size: 14px; color: var(--color-text); text-decoration: none; border-radius: 8px; }
+  .mobile-menu__action svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--color-mute); }
+  body.menu-open { overflow: hidden; }
+
+  @media (max-width: 768px) {
+    .header__menu-toggle { display: inline-flex; }
+    .header { grid-template-columns: 1fr auto 1fr !important; padding: 8px 12px !important; gap: 8px !important; }
+    .header__logo { justify-content: center; justify-self: center; }
+    .header__actions { justify-self: end; gap: 8px !important; }
+    .header__logo img { height: 28px !important; }
+    .header__search { display: none !important; }
+    .header__action { display: none !important; }
+    .header__cart { width: 40px !important; height: 40px !important; }
+    .nav-strip { padding: 6px 14px 8px !important; gap: 2px !important; overflow-x: auto; scrollbar-width: none; border-top: 1px solid rgba(42,28,26,0.06); flex-wrap: nowrap; }
+    .nav-strip::-webkit-scrollbar { display: none; }
+    .nav-strip__pill { padding: 6px 10px !important; font-size: 12px !important; background: transparent !important; color: var(--color-mute) !important; font-weight: 500 !important; flex-shrink: 0; }
+    .nav-strip__pill svg { display: none !important; }
+    .header-wrap { padding: 12px 0 8px !important; }
+    body.is-scrolled .header-wrap { padding: 6px 0 4px !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee">
+  <div class="marquee__track">
+    <span class="marquee__item">10% de desconto na primeira compra</span><span class="marquee__sep">◆</span>
+    <span class="marquee__item">Frete grátis acima de R$ 199,90 para todo o Brasil</span><span class="marquee__sep">◆</span>
+    <span class="marquee__item">3x sem juros no cartão</span><span class="marquee__sep">◆</span>
+    <span class="marquee__item">Cashback em todos os produtos</span><span class="marquee__sep">◆</span>
+    <span class="marquee__item">10% de desconto na primeira compra</span><span class="marquee__sep">◆</span>
+    <span class="marquee__item">Frete grátis acima de R$ 199,90 para todo o Brasil</span><span class="marquee__sep">◆</span>
+    <span class="marquee__item">3x sem juros no cartão</span><span class="marquee__sep">◆</span>
+    <span class="marquee__item">Cashback em todos os produtos</span><span class="marquee__sep">◆</span>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<div class="header-wrap">
+  <div class="header-shell">
+  <header class="header">
+    <button class="header__menu-toggle" type="button" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false" onclick="toggleMobileMenu(true)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <a href="index.html" class="header__logo" aria-label="Nanovit"><img src="https://nanovitnutrition.com.br/cdn/shop/files/nanovit-suplementos-e-vitaminas-logo-color.svg?v=1716320281&width=240" alt="Nanovit"></a>
+    <div class="header__search"><span class="header__search-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input type="search" placeholder="O que você procura?"></div>
+    <div class="header__actions">
+      <a href="#" class="header__action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="header__action-label">Login</span></a>
+      <a href="central-de-atendimento.html" class="header__action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span class="header__action-label">Ajuda</span></a>
+      <a href="#" class="header__cart" aria-label="Carrinho"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg><span class="header__cart-badge">2</span></a>
+    </div>
+  </header>
+  <nav class="nav-strip" aria-label="Categorias">
+    <a href="index.html" class="nav-strip__pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>Compre por objetivo</a>
+    <a href="index.html#quiz" class="nav-strip__pill">Quiz Personalizado</a>
+    <a href="index.html#kits" class="nav-strip__pill">Kits</a>
+    <a href="index.html#mais-vendidos" class="nav-strip__pill">Mais vendidos</a>
+    <a href="index.html#lancamentos" class="nav-strip__pill">Lançamentos</a>
+    <a href="index.html#promocoes" class="nav-strip__pill">Promoções</a>
+    <a href="index.html#produtos" class="nav-strip__pill">Todos os produtos</a>
+  </nav>
+  </div>
+</div>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu__backdrop" onclick="toggleMobileMenu(false)"></div>
+  <aside class="mobile-menu__panel" role="dialog" aria-label="Menu de navegação">
+    <div class="mobile-menu__head">
+      <a href="index.html" class="mobile-menu__logo" aria-label="Nanovit"><img src="https://nanovitnutrition.com.br/cdn/shop/files/nanovit-suplementos-e-vitaminas-logo-color.svg?v=1716320281&width=240" alt="Nanovit"></a>
+      <button type="button" class="mobile-menu__close" aria-label="Fechar menu" onclick="toggleMobileMenu(false)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <form class="mobile-menu__search" onsubmit="return false;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="search" placeholder="O que você procura?" aria-label="Buscar"></form>
+    <nav class="mobile-menu__nav" aria-label="Navegação">
+      <a href="index.html" class="mobile-menu__link mobile-menu__link--primary">Compre por objetivo</a>
+      <a href="index.html#quiz" class="mobile-menu__link">Quiz Personalizado</a>
+      <a href="index.html#kits" class="mobile-menu__link">Kits</a>
+      <a href="index.html#mais-vendidos" class="mobile-menu__link">Mais vendidos</a>
+      <a href="index.html#lancamentos" class="mobile-menu__link">Lançamentos</a>
+      <a href="index.html#promocoes" class="mobile-menu__link">Promoções</a>
+      <a href="index.html#produtos" class="mobile-menu__link">Todos os produtos</a>
+    </nav>
+    <div class="mobile-menu__foot">
+      <a href="#" class="mobile-menu__action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>Entrar / Cadastrar</span></a>
+      <a href="central-de-atendimento.html" class="mobile-menu__action"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><span>Ajuda</span></a>
+    </div>
+  </aside>
+</div>
+
+  <main class="shell">
+
+    <div class="top">
+
+      <aside class="nav-card">
+        <div class="nav-card__brand">
+          <div class="nav-card__logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <div class="nav-card__brand-text">
+            Central<br/><small>de Atendimento</small>
+          </div>
+        </div>
+
+        <div class="nav-card__group-label">Atendimento</div>
+        <nav class="nav-card__list">
+          <a href="central-de-atendimento.html" class="nav-card__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Fale Conosco
+          </a>
+          <a href="politica-de-reembolso.html" class="nav-card__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            Política de Reembolso
+          </a>
+          <a href="politica-de-frete.html" class="nav-card__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            Política de Frete
+          </a>
+          <a href="termos-de-servico.html" class="nav-card__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Termos de Serviço
+          </a>
+        </nav>
+
+        <div class="nav-card__group-label">Programas</div>
+        <nav class="nav-card__list">
+          <a href="seja-um-afiliado.html" class="nav-card__item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Seja um afiliado
+          </a>
+          <a href="#" class="nav-card__item is-active">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5"/><path d="M12 21V12"/><path d="M8 16h8"/></svg>
+            Seja um prescritor
+          </a>
+        </nav>
+      </aside>
+
+      <section class="hero">
+        <div class="hero__top">
+          <span class="hero__eyebrow">Programa de Prescritores</span>
+          <h1 class="hero__title">Suplementação clínica com respaldo da Nanovit.</h1>
+        </div>
+        <p class="hero__lead">Programa exclusivo para médicos, nutricionistas e profissionais de saúde habilitados. Acesso a fichas técnicas, condição comercial diferenciada para pacientes e suporte direto da nossa equipe técnica.</p>
+        <div class="hero__chips">
+          <span class="hero__chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5"/><path d="M12 21V12"/></svg> Desconto exclusivo</span>
+          <span class="hero__chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> Material técnico</span>
+          <span class="hero__chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> CRM/CRN validado</span>
+        </div>
+      </section>
+    </div>
+
+    <!-- TIMELINE -->
+    <section class="steps">
+      <article class="step">
+        <span class="step__num">01</span>
+        <div class="step__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <div class="step__title">Cadastro</div>
+        <div class="step__sub">Preencha o formulário com seus dados profissionais e CRM ou CRN.</div>
+      </article>
+      <article class="step">
+        <span class="step__num">02</span>
+        <div class="step__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.66 0 3.22.45 4.56 1.24"/></svg></div>
+        <div class="step__title">Validação</div>
+        <div class="step__sub">Validamos seu registro junto ao conselho profissional em até 3 dias úteis.</div>
+      </article>
+      <article class="step">
+        <span class="step__num">03</span>
+        <div class="step__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="step__title">Acesso liberado</div>
+        <div class="step__sub">Você recebe credenciais para a área restrita com material técnico completo.</div>
+      </article>
+      <article class="step">
+        <span class="step__num">04</span>
+        <div class="step__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5"/><path d="M12 21V12"/></svg></div>
+        <div class="step__title">Prescrição</div>
+        <div class="step__sub">Seu paciente compra com desconto exclusivo no nosso e-commerce.</div>
+      </article>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="content">
+
+      <article class="policy-card">
+        <div class="policy-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5"/><path d="M12 21V12"/><path d="M8 16h8"/></svg>
+        </div>
+        <div>
+          <h2 class="policy-card__title">Desconto exclusivo para pacientes</h2>
+          <div class="policy-card__body">
+            <p>Cada profissional cadastrado recebe um <strong>código de prescrição único</strong>, que garante <strong>desconto especial</strong> para pacientes na compra dos produtos Nanovit.</p>
+            <p>O desconto é aplicado automaticamente no checkout, sem burocracia para o paciente e sem custo para o prescritor.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="policy-card">
+        <div class="policy-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div>
+          <h2 class="policy-card__title">Material técnico</h2>
+          <div class="policy-card__body">
+            <p>Acesso completo às <strong>fichas técnicas</strong>, laudos de matéria-prima, certificados de análise e referências bibliográficas que embasam cada formulação.</p>
+            <p>Disponibilizamos também resumos clínicos por categoria de ativo para apoiar a decisão de prescrição.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="policy-card">
+        <div class="policy-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div>
+          <h2 class="policy-card__title">Suporte clínico direto</h2>
+          <div class="policy-card__body">
+            <p>Canal exclusivo para tirar dúvidas com nosso <strong>responsável técnico</strong> e equipe científica sobre formulações, posologias, interações e estudos.</p>
+            <p>Atendimento por e-mail e WhatsApp em horário comercial.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="policy-card">
+        <div class="policy-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.66 0 3.22.45 4.56 1.24"/></svg>
+        </div>
+        <div>
+          <h2 class="policy-card__title">Critérios de elegibilidade</h2>
+          <div class="policy-card__body">
+            <p>O programa é destinado exclusivamente a <strong>profissionais de saúde habilitados</strong> com registro ativo: médicos (CRM), nutricionistas (CRN), farmacêuticos (CRF), fisioterapeutas (CREFITO) e profissionais de educação física (CREF).</p>
+            <p>O cadastro é validado individualmente — só após a confirmação do registro o acesso é liberado.</p>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- FORM -->
+    <section class="form-card" id="cadastro">
+      <h2 class="form-card__title">Cadastro de Prescritor</h2>
+      <p class="form-card__sub">Preencha os dados abaixo. Após a validação do seu registro profissional, você receberá as credenciais de acesso por e-mail.</p>
+
+      <form class="form-grid" onsubmit="event.preventDefault(); alert('Cadastro enviado. Entraremos em contato em até 3 dias úteis.');">
+        <div class="form-field">
+          <label for="nome">Nome completo <span class="req">*</span></label>
+          <input id="nome" name="nome" type="text" required placeholder="Dr(a). Nome Sobrenome" />
+        </div>
+        <div class="form-field">
+          <label for="email">E-mail profissional <span class="req">*</span></label>
+          <input id="email" name="email" type="email" required placeholder="seu@email.com" />
+        </div>
+        <div class="form-field">
+          <label for="telefone">Telefone / WhatsApp <span class="req">*</span></label>
+          <input id="telefone" name="telefone" type="tel" required placeholder="(00) 00000-0000" />
+        </div>
+        <div class="form-field">
+          <label for="cpf">CPF <span class="req">*</span></label>
+          <input id="cpf" name="cpf" type="text" required placeholder="000.000.000-00" />
+        </div>
+        <div class="form-field">
+          <label for="conselho">Conselho <span class="req">*</span></label>
+          <select id="conselho" name="conselho" required>
+            <option value="">Selecione…</option>
+            <option value="CRM">CRM — Médico</option>
+            <option value="CRN">CRN — Nutricionista</option>
+            <option value="CRF">CRF — Farmacêutico</option>
+            <option value="CREFITO">CREFITO — Fisioterapeuta</option>
+            <option value="CREF">CREF — Educador Físico</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="registro">Nº de registro <span class="req">*</span></label>
+          <input id="registro" name="registro" type="text" required placeholder="Ex: 123456" />
+        </div>
+        <div class="form-field">
+          <label for="uf">UF de registro <span class="req">*</span></label>
+          <input id="uf" name="uf" type="text" required maxlength="2" placeholder="SP" style="text-transform: uppercase;" />
+        </div>
+        <div class="form-field">
+          <label for="especialidade">Especialidade / Área de atuação</label>
+          <input id="especialidade" name="especialidade" type="text" placeholder="Ex: Endocrinologia, Nutrologia, Esportiva…" />
+        </div>
+        <div class="form-field form-field--full">
+          <label for="mensagem">Mensagem (opcional)</label>
+          <textarea id="mensagem" name="mensagem" placeholder="Conte um pouco sobre sua atuação clínica e o que motivou o cadastro."></textarea>
+        </div>
+
+        <label class="form-consent">
+          <input type="checkbox" required />
+          <span>Declaro que as informações fornecidas são verídicas e autorizo a Nanovit Nutrition a validar meu registro profissional junto ao conselho competente, conforme nossa política de privacidade.</span>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="form-submit">
+            Cadastre-se como prescritor
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Notice -->
+    <div class="notice">
+      <strong>Conformidade:</strong> a Nanovit Nutrition opera sob responsabilidade técnica e segue as boas práticas de fabricação. Os produtos não substituem alimentação variada e equilibrada nem dispensam acompanhamento profissional.
+    </div>
+
+    <footer class="company">
+      <div class="company__name">NANOVIT NUTRITION LTDA</div>
+      <div class="company__cnpj">CNPJ: <b>53.095.731/0001-24</b></div>
+    </footer>
+
+  </main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer" style="margin:80px calc(-1 * clamp(16px, 3vw, 32px)) 0;background:#2a1c1a;color:#fff;padding:64px clamp(16px, 3vw, 32px) 0;width:auto;">
+  <div style="max-width:var(--container);margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:64px;padding-bottom:40px;">
+      <div>
+        <a href="index.html" aria-label="Nanovit" style="display:inline-block;margin-bottom:20px;"><img src="https://nexgeniusstore.myshopify.com/cdn/shop/files/nanovit-suplementos-e-vitaminas-icon.webp?v=1777382021&width=240" alt="Nanovit" style="height:36px;width:auto;display:block;filter:brightness(0) invert(1);"></a>
+        <p style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6;max-width:320px;">Fórmulas integrativas com múltiplos ativos para quem quer resultado real. Desenvolvidas com especialistas, notificadas na ANVISA.</p>
+      </div>
+      <div><h4 style="font-family:var(--font-title);font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:18px;">Links rápidos</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:12px;padding:0;margin:0;"><li><a href="index.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Início</a></li><li><a href="seja-um-afiliado.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Seja afiliado</a></li><li><a href="seja-um-prescritor.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Seja prescritor</a></li></ul></div>
+      <div><h4 style="font-family:var(--font-title);font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:18px;">Institucional</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:12px;padding:0;margin:0;"><li><a href="central-de-atendimento.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Fale Conosco</a></li><li><a href="seja-um-afiliado.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Seja um afiliado</a></li><li><a href="seja-um-prescritor.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Seja um prescritor</a></li><li><a href="politica-de-frete.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Política de Frete</a></li><li><a href="politica-de-reembolso.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Política de Reembolso</a></li><li><a href="termos-de-servico.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;">Termos de Serviço</a></li></ul></div>
+      <div><h4 style="font-family:var(--font-title);font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:18px;">Contato</h4><ul style="list-style:none;display:flex;flex-direction:column;gap:14px;padding:0;margin:0;"><li><a href="mailto:contato@nanovit.com.br" style="font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;">contato@nanovit.com.br</a></li><li><a href="tel:+551199999999" style="font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;">(11) 9999-9999</a></li></ul></div>
+    </div>
+    <div style="padding:24px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,0.08);"><p style="font-size:12px;color:rgba(255,255,255,0.45);">© 2026 Nanovit Nutrition. Todos os direitos reservados.</p></div>
+  </div>
+</footer>
+
+<script>
+  (function(){var t=24,k=false;function u(){if(window.scrollY>t)document.body.classList.add('is-scrolled');else document.body.classList.remove('is-scrolled');k=false;}window.addEventListener('scroll',function(){if(!k){window.requestAnimationFrame(u);k=true;}},{passive:true});u();})();
+  function toggleMobileMenu(open){var m=document.getElementById('mobileMenu'),t=document.querySelector('.header__menu-toggle');if(!m)return;var s=(open===undefined)?(m.getAttribute('aria-hidden')==='true'):!!open;m.setAttribute('aria-hidden',s?'false':'true');if(t)t.setAttribute('aria-expanded',s?'true':'false');document.body.classList.toggle('menu-open',s);}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')toggleMobileMenu(false);});
+  document.querySelectorAll('.mobile-menu__link, .mobile-menu__action').forEach(function(el){el.addEventListener('click',function(){toggleMobileMenu(false);});});
+</script>
+
+</body>
+</html>

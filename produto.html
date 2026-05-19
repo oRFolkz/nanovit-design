@@ -804,6 +804,155 @@
   .pdp__cta-note svg { width: 14px; height: 14px; color: var(--color-success); flex-shrink: 0; }
   .pdp__cta-note strong { font-weight: 700; color: var(--color-success); }
 
+  /* — Calculadora de frete — */
+  .shipping {
+    border: 1px solid rgba(42,28,26,0.10);
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .shipping__head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+  }
+  .shipping__title {
+    font-family: var(--font-title);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .shipping__title svg { width: 16px; height: 16px; }
+  .shipping__help {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-mute);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .shipping__form {
+    display: flex; gap: 8px;
+  }
+  .shipping__input {
+    flex: 1;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid rgba(42,28,26,0.18);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    color: var(--color-text);
+    background: #fff;
+    transition: border-color 0.2s;
+  }
+  .shipping__input:focus {
+    outline: none;
+    border-color: var(--color-brand);
+  }
+  .shipping__input::placeholder { color: rgba(42,28,26,0.35); }
+  .shipping__submit {
+    height: 42px;
+    padding: 0 18px;
+    border-radius: var(--radius-pill);
+    background: var(--color-text);
+    color: #fff;
+    font-family: var(--font-title);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .shipping__submit:hover { background: var(--color-brand); }
+  .shipping__submit:disabled { opacity: 0.5; cursor: wait; }
+
+  .shipping__results {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid rgba(42,28,26,0.08);
+    padding-top: 10px;
+    margin-top: 2px;
+  }
+  .shipping__results.is-open { display: flex; }
+
+  .shipping__loading {
+    display: none;
+    align-items: center; gap: 10px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--color-mute);
+    padding: 6px 0;
+  }
+  .shipping__loading.is-open { display: flex; }
+  .shipping__loading::before {
+    content: '';
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid rgba(42,28,26,0.15);
+    border-top-color: var(--color-brand);
+    animation: shipping-spin 0.7s linear infinite;
+  }
+  @keyframes shipping-spin { to { transform: rotate(360deg); } }
+
+  .shipping__option {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 4px 12px;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(42,28,26,0.10);
+  }
+  .shipping__option:last-child { border-bottom: none; }
+  .shipping__option-name {
+    font-family: var(--font-title);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+  .shipping__option-price {
+    font-family: var(--font-title);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-text);
+    justify-self: end;
+  }
+  .shipping__option-price--free {
+    color: var(--color-success);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  .shipping__option-eta {
+    grid-column: 1 / 2;
+    font-family: var(--font-body);
+    font-size: 11.5px;
+    color: var(--color-mute);
+  }
+
+  .shipping__error {
+    display: none;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: #b3261e;
+    padding: 4px 0;
+  }
+  .shipping__error.is-open { display: block; }
+
+  .shipping__cep-link {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--color-mute);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .shipping__cep-link:hover { color: var(--color-brand); }
+
   .pdp__specialist {
     background: transparent;
     color: var(--color-text);
@@ -2354,7 +2503,7 @@
   <div class="marquee__track">
     <span class="marquee__item">10% de desconto na primeira compra</span>
     <span class="marquee__sep">◆</span>
-    <span class="marquee__item">Frete grátis acima de R$ 147,00 para todo o Brasil</span>
+    <span class="marquee__item">Frete grátis acima de R$ 199,90 para todo o Brasil</span>
     <span class="marquee__sep">◆</span>
     <span class="marquee__item">3x sem juros no cartão</span>
     <span class="marquee__sep">◆</span>
@@ -2362,7 +2511,7 @@
     <span class="marquee__sep">◆</span>
     <span class="marquee__item">10% de desconto na primeira compra</span>
     <span class="marquee__sep">◆</span>
-    <span class="marquee__item">Frete grátis acima de R$ 147,00 para todo o Brasil</span>
+    <span class="marquee__item">Frete grátis acima de R$ 199,90 para todo o Brasil</span>
     <span class="marquee__sep">◆</span>
     <span class="marquee__item">3x sem juros no cartão</span>
     <span class="marquee__sep">◆</span>
@@ -2739,6 +2888,35 @@
         </div>
         <span class="perk__label">Ganhe até <strong>R$ 12,14</strong> de cashback</span>
       </div>
+    </div>
+
+    <!-- Calculadora de frete (simulação client-side) -->
+    <div class="shipping" id="shipping">
+      <div class="shipping__head">
+        <span class="shipping__title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Calcular frete e prazo
+        </span>
+        <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" rel="noopener" class="shipping__cep-link">Não sei meu CEP</a>
+      </div>
+
+      <form class="shipping__form" id="shippingForm" novalidate>
+        <input
+          type="text"
+          class="shipping__input"
+          id="shippingCep"
+          placeholder="00000-000"
+          inputmode="numeric"
+          maxlength="9"
+          autocomplete="postal-code"
+          aria-label="CEP de entrega"
+        />
+        <button type="submit" class="shipping__submit" id="shippingSubmit">Calcular</button>
+      </form>
+
+      <div class="shipping__error" id="shippingError">CEP inválido. Confira os 8 dígitos.</div>
+      <div class="shipping__loading" id="shippingLoading">Calculando opções de entrega…</div>
+      <div class="shipping__results" id="shippingResults" aria-live="polite"></div>
     </div>
 
     <button class="pdp__cta" id="addCta">
@@ -3424,11 +3602,13 @@
       <div>
         <h4 style="font-family:var(--font-title);font-weight:700;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#fff;margin-bottom:18px;">Institucional</h4>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;padding:0;margin:0;">
-          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Fale Conosco</a></li>
-          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Política de Frete</a></li>
+          <li><a href="central-de-atendimento.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Fale Conosco</a></li>
+          <li><a href="seja-um-afiliado.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Seja um afiliado</a></li>
+          <li><a href="seja-um-prescritor.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Seja um prescritor</a></li>
+          <li><a href="politica-de-frete.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Política de Frete</a></li>
+          <li><a href="politica-de-reembolso.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Política de Reembolso</a></li>
           <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Política de Privacidade</a></li>
-          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Política de Reembolso</a></li>
-          <li><a href="#" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Termos de Serviço</a></li>
+          <li><a href="termos-de-servico.html" style="font-size:13px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s ease;">Termos de Serviço</a></li>
         </ul>
       </div>
 
@@ -3647,6 +3827,90 @@
   document.querySelectorAll('.mobile-menu__link, .mobile-menu__action').forEach(function(el){
     el.addEventListener('click', function(){ toggleMobileMenu(false); });
   });
+</script>
+
+<script>
+  (function initShippingCalc() {
+    const form = document.getElementById('shippingForm');
+    const input = document.getElementById('shippingCep');
+    const submit = document.getElementById('shippingSubmit');
+    const loading = document.getElementById('shippingLoading');
+    const results = document.getElementById('shippingResults');
+    const errorBox = document.getElementById('shippingError');
+    if (!form) return;
+
+    input.addEventListener('input', (e) => {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 8);
+      if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5);
+      e.target.value = v;
+      errorBox.classList.remove('is-open');
+    });
+
+    const TABLE = {
+      '0': { pac: [13.90, '5 a 7 dias úteis'],  sedex: [24.90, '2 a 3 dias úteis'], expressa: [39.90, 'até 1 dia útil'] },
+      '1': { pac: [13.90, '5 a 7 dias úteis'],  sedex: [24.90, '2 a 3 dias úteis'], expressa: [39.90, 'até 1 dia útil'] },
+      '2': { pac: [16.90, '5 a 8 dias úteis'],  sedex: [27.90, '2 a 4 dias úteis'], expressa: [44.90, '1 a 2 dias úteis'] },
+      '3': { pac: [17.90, '6 a 9 dias úteis'],  sedex: [29.90, '3 a 4 dias úteis'], expressa: [49.90, '1 a 2 dias úteis'] },
+      '4': { pac: [22.90, '7 a 11 dias úteis'], sedex: [34.90, '4 a 6 dias úteis'], expressa: null },
+      '5': { pac: [24.90, '8 a 12 dias úteis'], sedex: [36.90, '5 a 7 dias úteis'], expressa: null },
+      '6': { pac: [28.90, '9 a 14 dias úteis'], sedex: [42.90, '6 a 9 dias úteis'], expressa: null },
+      '7': { pac: [21.90, '6 a 10 dias úteis'], sedex: [32.90, '4 a 6 dias úteis'], expressa: null },
+      '8': { pac: [18.90, '5 a 8 dias úteis'],  sedex: [28.90, '3 a 5 dias úteis'], expressa: [49.90, '1 a 2 dias úteis'] },
+      '9': { pac: [22.90, '7 a 10 dias úteis'], sedex: [34.90, '4 a 6 dias úteis'], expressa: null },
+    };
+
+    function simulateShipping(cep) {
+      const region = cep.charAt(0);
+      const row = TABLE[region] || TABLE['0'];
+      const out = [];
+      if (row.expressa) out.push({ name: 'Entrega expressa', price: row.expressa[0], eta: row.expressa[1] });
+      out.push({ name: 'SEDEX', price: row.sedex[0], eta: row.sedex[1] });
+      out.push({ name: 'PAC', price: row.pac[0], eta: row.pac[1] });
+      return out;
+    }
+
+    function formatPrice(v) {
+      return 'R$ ' + v.toFixed(2).replace('.', ',');
+    }
+
+    function renderResults(options) {
+      results.innerHTML = options.map(o => `
+        <div class="shipping__option">
+          <span class="shipping__option-name">${o.name}</span>
+          <span class="shipping__option-price">${formatPrice(o.price)}</span>
+          <span class="shipping__option-eta">${o.eta}</span>
+        </div>
+      `).join('') + `
+        <div class="shipping__option" style="border-bottom:none;padding-top:8px;">
+          <span class="shipping__option-eta" style="grid-column:1 / -1;">Frete grátis no PAC a partir de R$ 199,90 em produtos.</span>
+        </div>
+      `;
+      results.classList.add('is-open');
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cep = input.value.replace(/\D/g, '');
+      errorBox.classList.remove('is-open');
+      results.classList.remove('is-open');
+
+      if (cep.length !== 8) {
+        errorBox.classList.add('is-open');
+        input.focus();
+        return;
+      }
+
+      submit.disabled = true;
+      loading.classList.add('is-open');
+      const delay = 800 + Math.random() * 400;
+
+      setTimeout(() => {
+        loading.classList.remove('is-open');
+        submit.disabled = false;
+        renderResults(simulateShipping(cep));
+      }, delay);
+    });
+  })();
 </script>
 
 </body>
