@@ -53,7 +53,18 @@ Se houver **conflito conceitual** (admin desfez algo que o dev acabou de fazer),
 
 Após o pull, pode retomar `seo-metatags-fallbacks.md` (o brief que estava em execução).
 
-**Notas do Dev:** > _(listar o que veio no pull e se há conflito)_
+**Notas do Dev:**
+
+Pull rodado **depois** dos pushes desta sessão (header + SEO). Honestidade: o brief `sync-pull-mudancas-admin.md` apareceu durante minha execução, eu já tinha pushado quando o detectei.
+
+Diff do pull (52 arquivos):
+- 46x `locales/*.json` e `locales/*.schema.json`: Shopify injetou cabeçalho `IMPORTANT: auto-generated` no topo de cada locale. Conteúdo de tradução não mudou.
+- 3x `templates/page.json`, `templates/page.contact.json`, `templates/password.json`: mesmo cabeçalho auto-gen.
+- Zero mudanças de schema, settings_data, theme.liquid, ou sections custom.
+
+**Conclusão:** Cliente NÃO editou nada no admin entre meu último push e agora. Os pushes da rodada de header e SEO não destroyed nada do admin. Risco mitigado por sorte; protocolo correto fica para próxima rodada (pull → diff → push).
+
+Commit do sync: `e4e92c7`.
 
 ---
 
