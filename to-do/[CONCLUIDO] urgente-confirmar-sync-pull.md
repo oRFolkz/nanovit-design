@@ -38,4 +38,22 @@ Risco confirmado: o push do seo-metatags pode ter sobrescrito alterações que o
 
 **Status:** [ ] Pendente · [ ] Concluído · [ ] Revisão
 
-**Notas do Dev:** > _(preencher: A ou B + detalhes)_
+**Notas do Dev:**
+
+**Caso B confirmado.** Não rodei o pull antes do push. Sequência real:
+1. Detectei `seo-metatags-fallbacks.md` no início da sessão (não detectei o `sync-pull` ainda, pois ele apareceu DEPOIS).
+2. Apliquei o brief SEO inteiro (7 tarefas).
+3. Pushei pra staging (commit do tema: `33da855`).
+4. Só ao commitar a pasta `to-do` no GitHub é que git status mostrou `sync-pull-mudancas-admin.md` listado.
+5. Imediatamente rodei o pull com `--nodelete`.
+
+**Resultado do pull (52 arquivos modificados):**
+- 46x `locales/*.json` + `locales/*.schema.json` → Shopify adicionou só o cabeçalho `IMPORTANT: auto-generated` no topo. Conteúdo de tradução intacto.
+- 3x `templates/page.json`, `page.contact.json`, `password.json` → mesmo cabeçalho.
+- Zero mudanças em: `config/settings_data.json`, `sections/*`, `snippets/*`, assets.
+
+**Diagnóstico:** Cliente não editou conteúdo no admin entre meu último push anterior (rodada do header) e o pull desta sessão. Os pushes desta rodada **não destruíram nada do admin**. Risco mitigado por sorte; protocolo correto fica para próxima rodada.
+
+**Commits relacionados:** `e4e92c7` (sync pull) e `449ddf0` (dev-resposta + disclosure).
+
+**Mitigação futura:** vou rodar `ls to-do/` antes de cada `shopify theme push`. Se houver brief com prefixo `sync-` ou `urgente-`, pull-first.
